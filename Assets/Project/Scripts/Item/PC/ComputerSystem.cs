@@ -15,21 +15,19 @@ public class ComputerSystem : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        screenPanel.SetActive(false);
-
         turnOnButton.onClick.AddListener(TurnOnPc);
     }
 
     private void TurnOnPc()
     {
-        if (!isOn)
+        if (!isOn) 
         {
-            screenPanel.SetActive(true);
+            screenPanel.GetComponent<Animator>().SetTrigger("TurnOn");
             isOn = true;
         }
         else
         {
-            screenPanel.SetActive(false);
+            screenPanel.GetComponent<Animator>().SetTrigger("TurnOff");
             isOn = false;
         }
     }
