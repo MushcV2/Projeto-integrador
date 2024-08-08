@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UseComputer : Item
 {
-    [SerializeField] private Transform newPos;
     [SerializeField] private GameObject chair;
 
     protected override void Start()
@@ -16,12 +15,13 @@ public class UseComputer : Item
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         crossHair.gameObject.SetActive(false);
+        sanityBar.SetActive(false);
+        taskPanel.SetActive(false);
 
         player.canMove = false;
         cam.GetComponent<CameraController>().stopFollowing = true;
 
-        player.gameObject.transform.position = new Vector3(newPos.position.x, player.gameObject.transform.position.y, newPos.position.z);
-
+        //player.gameObject.transform.position = new Vector3(newPos.position.x, player.gameObject.transform.position.y, newPos.position.z);
     }
 
     public override void StopInteract()
@@ -29,11 +29,12 @@ public class UseComputer : Item
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         crossHair.gameObject.SetActive(true);
+        sanityBar.SetActive(true);
+        taskPanel.SetActive(true);
 
         playerInteract.alreadyInteract = true;
         playerInteract.interactObject = chair;
 
         cam.GetComponent<CameraController>().stopFollowing = false;
-
     }
 }

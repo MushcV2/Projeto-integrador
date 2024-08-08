@@ -13,6 +13,8 @@ public class Item : MonoBehaviour
     [SerializeField] protected PlayerInteract playerInteract;
     [SerializeField] protected PlayerController player;
     [SerializeField] protected Image crossHair;
+    [SerializeField] protected GameObject sanityBar;
+    [SerializeField] protected GameObject taskPanel;
     [SerializeField] protected Camera cam;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform itemPos;
