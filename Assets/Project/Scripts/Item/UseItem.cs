@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
-public class PickItem : Item
+public class UseItem : Item
 {
     private void Update()
     {

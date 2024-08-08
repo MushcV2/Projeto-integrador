@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UseComputer : Item
 {
@@ -17,11 +18,10 @@ public class UseComputer : Item
         crossHair.gameObject.SetActive(false);
         sanityBar.SetActive(false);
         taskPanel.SetActive(false);
+        clockPanel.SetActive(false);
 
         player.canMove = false;
         cam.GetComponent<CameraController>().stopFollowing = true;
-
-        //player.gameObject.transform.position = new Vector3(newPos.position.x, player.gameObject.transform.position.y, newPos.position.z);
     }
 
     public override void StopInteract()
@@ -31,6 +31,7 @@ public class UseComputer : Item
         crossHair.gameObject.SetActive(true);
         sanityBar.SetActive(true);
         taskPanel.SetActive(true);
+        clockPanel.SetActive(true);
 
         playerInteract.alreadyInteract = true;
         playerInteract.interactObject = chair;

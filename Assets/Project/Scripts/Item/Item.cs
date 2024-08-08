@@ -15,6 +15,7 @@ public class Item : MonoBehaviour
     [SerializeField] protected Image crossHair;
     [SerializeField] protected GameObject sanityBar;
     [SerializeField] protected GameObject taskPanel;
+    [SerializeField] protected GameObject clockPanel;
     [SerializeField] protected Camera cam;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform itemPos;
@@ -28,6 +29,7 @@ public class Item : MonoBehaviour
         playerInteract = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteract>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         task = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<Tasks>();
+        itemPos = GameObject.FindGameObjectWithTag("ItemPos").GetComponent<Transform>();
     }
 
     protected virtual void Start()
@@ -56,6 +58,9 @@ public class Item : MonoBehaviour
 
     public virtual void StopInteract()
     {
+        if (usable && usableItem != null)
+            usableItem.gameObject.SetActive(false);
+
         rb.isKinematic = false;
         rb.useGravity = true;
         rb.velocity = Vector3.zero;
@@ -75,6 +80,9 @@ public class Item : MonoBehaviour
         {
             StopInteract();
             playerInteract.alreadyInteract = false;
+
+            if (usable && usableItem != null)
+                usableItem.gameObject.SetActive(false);
         }
     }
 
