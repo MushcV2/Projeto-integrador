@@ -1523,8 +1523,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   currentSpeed: 0
-  crouchSpeed: 0
-  walkSpeed: 0
+  crouchSpeed: 3
+  walkSpeed: 6
   gravity: 9.87
   isCrouching: 0
   walking: 0
