@@ -25,11 +25,7 @@ public class Tasks : MonoBehaviour
     private void Update()
     {
         if (missionsCompletedCount == missions.Count)
-        {
-            missionTXT.text = "Todas as missões foram completas";
-            rng = -1;
-            return;
-        }
+            AllMissionsCompleted();
 
         if (missionCompleted)
         {
@@ -75,5 +71,13 @@ public class Tasks : MonoBehaviour
     private void CompletedCountAdd()
     {
         missionsCompletedCount++;
+    }
+
+    private void AllMissionsCompleted()
+    {
+        missionTXT.text = "Todas as missões foram completas";
+        rng = -1;
+
+        return;
     }
 }
