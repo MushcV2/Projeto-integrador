@@ -14,7 +14,7 @@ public class PlayerController : SanityController
     [SerializeField] private float crouchSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float gravity;
-    [SerializeField] private bool isCrouching;
+    public bool isCrouching;
     public bool walking;
     public bool canMove;
     public bool isSitting;

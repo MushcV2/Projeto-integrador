@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ComputerSystem : MonoBehaviour
 {
     [Header("Computer Variables")]
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController player;
     [SerializeField] private Button turnOnButton;
     [SerializeField] private Button template;
@@ -16,6 +17,7 @@ public class ComputerSystem : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         turnOnButton.onClick.AddListener(TurnOnPc);
@@ -33,6 +35,7 @@ public class ComputerSystem : MonoBehaviour
             screenPanel.GetComponent<Animator>().SetTrigger("TurnOn");
             Invoke(nameof(ActiveApps), 1.5f);
 
+            gameManager.multiplier = 2;
             isOn = true;
         }
         else
@@ -42,6 +45,7 @@ public class ComputerSystem : MonoBehaviour
             windownPanel.SetActive(false);
             appsPanel.SetActive(false);
 
+            gameManager.multiplier = 1;
             isOn = false;
         }
     }

@@ -11,12 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text clockTXT;
     [SerializeField] private TMP_Text dayTXT;
     [SerializeField] private float timeElapse;
-    [SerializeField] private float multiplier;
     [SerializeField] private float seconds;
     [SerializeField] private int minutes;
     [SerializeField] private int days;
-    [SerializeField] private bool dayCycleCompleted;
     [SerializeField] private bool timeIsRunning;
+    public float multiplier;
 
     [Header("Start New Day Variables")]
     [SerializeField] private GameObject dayPointsPanel;
@@ -79,7 +78,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateClock(float _time)
     {
-        //if (minutes == 2 && !dayCycleCompleted) DayCycle();
         seconds += Mathf.FloorToInt(_time % 60);
 
         if (seconds >= 60)
@@ -99,7 +97,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Dia passou");
 
-        dayCycleCompleted = true;
         timeIsRunning = false;
         days++;
 
@@ -139,6 +136,5 @@ public class GameManager : MonoBehaviour
         seconds = 0;
 
         timeIsRunning = true;
-        //cycleCompleted = false;
     }
 }

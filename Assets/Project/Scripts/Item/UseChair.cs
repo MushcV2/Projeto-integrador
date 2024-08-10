@@ -14,6 +14,12 @@ public class UseChair : Item
 
     public override void InteractFunction()
     {
+        if (player.isCrouching)
+        {
+            playerInteract.alreadyInteract = false;
+            return;
+        }
+
         player.canMove = false;
         player.isSitting = true;
         playerInteract.alreadyInteract = false;
