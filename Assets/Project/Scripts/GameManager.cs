@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Diagnostics;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,62 +10,97 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SanityController sanity;
     [SerializeField] private TMP_Text clockTXT;
     [SerializeField] private TMP_Text dayTXT;
-    [SerializeField] private float timeElpase;
+    [SerializeField] private float timeElapse;
     [SerializeField] private float multiplier;
     [SerializeField] private float seconds;
     [SerializeField] private int minutes;
     [SerializeField] private int days;
-    [SerializeField] private bool cycleCompleted;
     [SerializeField] private bool dayCycleCompleted;
+    [SerializeField] private bool timeIsRunning;
 
-
-    [Header("Star New Day Variables")]
+    [Header("Start New Day Variables")]
     [SerializeField] private GameObject dayPointsPanel;
     [SerializeField] private Button startNextDay;
 
-
+    [Header("ONLY IN EDITOR VARIABLES")]
+    public Button forceNewDay;
+    public bool activeCursor;
 
     private void Start()
     {
         StartCoroutine(LostSanity());
         dayTXT.text = "Days: " + days;
 
+        timeIsRunning = true;
+
         dayPointsPanel.SetActive(false);
 
-        startNextDay.onClick.AddListener(StarNewDay);
+        startNextDay.onClick.AddListener(StartNewDay);
+        forceNewDay.onClick.AddListener(DayCycle);
+
+        if (Application.isEditor)
+            forceNewDay.gameObject.SetActive(true);
+        else
+            forceNewDay.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        timeElpase += Time.deltaTime * multiplier;
+        clockTXT.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        UpdateClock(timeElpase);
+        if (timeIsRunning)
+        {
+            timeElapse += Time.deltaTime * multiplier;
+
+            if (timeElapse >= 1f)
+            {
+                UpdateClock(timeElapse);
+                timeElapse = 0f;
+            }
+        }
+
+        #region ACTIVE_CURSOR
+        if (Input.GetKeyDown(KeyCode.M) && !activeCursor)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            activeCursor = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.M) && activeCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            activeCursor = false;
+        }
+        #endregion
     }
 
     private void UpdateClock(float _time)
     {
-        if (minutes == 2 && !dayCycleCompleted) DayCycle();
+        //if (minutes == 2 && !dayCycleCompleted) DayCycle();
+        seconds += Mathf.FloorToInt(_time % 60);
+
+        if (seconds >= 60)
+        {
+            minutes++;
+            seconds = 0;
+        }
 
         if (minutes >= 24)
-            cycleCompleted = true;
+            minutes = 0;
 
-        if (cycleCompleted)
-            minutes = -5;
-        else
-            minutes = 19;
-
-        minutes += Mathf.FloorToInt(_time / 60) % 60;
-        seconds = Mathf.FloorToInt(_time % 60);
-
-        clockTXT.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (minutes == 2)
+            DayCycle();
     }
 
     private void DayCycle()
     {
-        print("Dia virou");
+        Debug.Log("Dia passou");
 
         dayCycleCompleted = true;
-        multiplier = 0;
+        timeIsRunning = false;
         days++;
 
         DisplayDayPoints();
@@ -91,14 +125,20 @@ public class GameManager : MonoBehaviour
         dayPointsPanel.SetActive(true);
     }
 
-    private void StarNewDay()
+    private void StartNewDay()
     {
+        Debug.Log("Novo dia");
+
         dayPointsPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         minutes = 19;
-        multiplier = 1;
+        timeElapse = 0;
+        seconds = 0;
+
+        timeIsRunning = true;
+        //cycleCompleted = false;
     }
 }
