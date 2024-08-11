@@ -8,7 +8,7 @@ public class WindowDrag : MonoBehaviour, IDragHandler
 {
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private RectTransform backgroundSize;
-
+    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -20,13 +20,13 @@ public class WindowDrag : MonoBehaviour, IDragHandler
         Vector3 _worldPos;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(backgroundSize, _mousePos, Camera.main, out _worldPos);
 
-        Vector3 localPosition = backgroundSize.InverseTransformPoint(_worldPos);
-        Vector3 minBounds = backgroundSize.rect.min;
-        Vector3 maxBounds = backgroundSize.rect.max;
+        Vector3 _localPos = backgroundSize.InverseTransformPoint(_worldPos);
+        Vector3 _minBounds = backgroundSize.rect.min;
+        Vector3 _maxBounds = backgroundSize.rect.max;
 
-        localPosition.x = Mathf.Clamp(localPosition.x, minBounds.x + rectTransform.rect.width / 2, maxBounds.x - rectTransform.rect.width / 2);
-        localPosition.y = Mathf.Clamp(localPosition.y, minBounds.y + rectTransform.rect.height / 2, maxBounds.y - rectTransform.rect.height / 2);
+        _localPos.x = Mathf.Clamp(_localPos.x, _minBounds.x + rectTransform.rect.width / 2, _maxBounds.x - rectTransform.rect.width / 2);
+        _localPos.y = Mathf.Clamp(_localPos.y, _minBounds.y + rectTransform.rect.height / 2, _maxBounds.y - rectTransform.rect.height / 2);
 
-        rectTransform.position = backgroundSize.TransformPoint(localPosition);
+        rectTransform.position = backgroundSize.TransformPoint(_localPos);
     }
 }
