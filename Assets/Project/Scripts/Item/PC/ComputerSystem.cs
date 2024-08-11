@@ -22,7 +22,7 @@ public class ComputerSystem : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         turnOnButton.onClick.AddListener(TurnOnPc);
-        template.onClick.AddListener(OpenWindow);
+        //template.onClick.AddListener(OpenWindow);
         windownPanel.GetComponentInChildren<Button>().onClick.AddListener(CloseWindow);
 
         appsPanel.SetActive(false);
