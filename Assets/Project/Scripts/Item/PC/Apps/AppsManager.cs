@@ -10,6 +10,7 @@ public class AppsManager : MonoBehaviour
     private void Awake()
     {
         windowPanel = transform.Find("Window");
+        windowPanel.gameObject.SetActive(false);
     }
 
     private void Start()

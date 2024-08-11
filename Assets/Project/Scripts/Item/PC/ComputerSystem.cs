@@ -9,10 +9,8 @@ public class ComputerSystem : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController player;
     [SerializeField] private Button turnOnButton;
-    [SerializeField] private Button template;
     [SerializeField] private GameObject screenPanel;
     [SerializeField] private GameObject appsPanel;
-    [SerializeField] private GameObject windownPanel;
     [SerializeField] private bool isOn;
     [SerializeField] private bool canTurnOff;
 
@@ -22,11 +20,8 @@ public class ComputerSystem : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         turnOnButton.onClick.AddListener(TurnOnPc);
-        //template.onClick.AddListener(OpenWindow);
-        windownPanel.GetComponentInChildren<Button>().onClick.AddListener(CloseWindow);
 
         appsPanel.SetActive(false);
-        windownPanel.SetActive(false);
     }
     private void TurnOnPc()
     {
@@ -44,7 +39,6 @@ public class ComputerSystem : MonoBehaviour
             screenPanel.GetComponent<Animator>().SetTrigger("TurnOff");
             Invoke(nameof(CanTurnOff), 2);
 
-            windownPanel.SetActive(false);
             appsPanel.SetActive(false);
 
             gameManager.multiplier = 1;
@@ -63,15 +57,5 @@ public class ComputerSystem : MonoBehaviour
         if (!isOn) return;
 
         appsPanel.SetActive(true);
-    }
-
-    private void OpenWindow()
-    {
-        windownPanel.SetActive(true);
-    }
-
-    private void CloseWindow()
-    {
-        windownPanel.SetActive(false);
     }
 }
