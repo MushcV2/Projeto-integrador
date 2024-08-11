@@ -22,6 +22,7 @@ public class AppsManager : MonoBehaviour
     protected virtual void OpenWindow()
     {
         windowPanel.gameObject.SetActive(true);
+        GetComponent<Button>().enabled = false;
 
         Debug.Log("Ativado");
     }
@@ -29,5 +30,6 @@ public class AppsManager : MonoBehaviour
     private void CloseWindow()
     {
         windowPanel.gameObject.SetActive(false);
+        GetComponent<Button>().enabled = true;
     }
 }
