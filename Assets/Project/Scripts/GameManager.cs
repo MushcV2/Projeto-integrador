@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SanityController sanity;
     [SerializeField] private TMP_Text clockTXT;
     [SerializeField] private TMP_Text dayTXT;
+    [SerializeField] private TMP_Text dayComputerTXT;
     [SerializeField] private float timeElapse;
     [SerializeField] private float seconds;
     [SerializeField] private int minutes;
@@ -28,7 +29,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(LostSanity());
-        dayTXT.text = "Days: " + days;
+        dayTXT.text = "Dia: " + days;
+        dayComputerTXT.text = "Dia: " + days;
 
         timeIsRunning = true;
 
@@ -102,7 +104,8 @@ public class GameManager : MonoBehaviour
 
         DisplayDayPoints();
 
-        dayTXT.text = "Days: " + days;
+        dayTXT.text = "Dia: " + days;
+        dayComputerTXT.text = "Dia: " + days;
     }
 
     private IEnumerator LostSanity()
