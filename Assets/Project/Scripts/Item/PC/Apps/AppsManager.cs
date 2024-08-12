@@ -33,7 +33,7 @@ public class AppsManager : MonoBehaviour
         Debug.Log("Ativado");
     }
 
-    private void CloseWindow()
+    public void CloseWindow()
     {
         windowPanel.gameObject.SetActive(false);
         windowRect.position = initialPos;
