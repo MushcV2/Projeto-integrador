@@ -11,6 +11,7 @@ public class ComputerSystem : MonoBehaviour
     [SerializeField] private AppsManager appsManager;
     [SerializeField] private Button turnOnButton;
     [SerializeField] private Button taskBarTurnOff;
+    [SerializeField] private Button restartTaskBar;
     [SerializeField] private GameObject taskBarPanel;
     [SerializeField] private GameObject screenPanel;
     [SerializeField] private GameObject appsPanel;
@@ -24,6 +25,7 @@ public class ComputerSystem : MonoBehaviour
 
         turnOnButton.onClick.AddListener(TurnOnPc);
         taskBarTurnOff.onClick.AddListener(TaskBarTurnOff);
+        restartTaskBar.onClick.AddListener(Restart);
 
         appsPanel.SetActive(false);
     }
@@ -84,5 +86,13 @@ public class ComputerSystem : MonoBehaviour
         Invoke(nameof(CanTurnOff), 2);
         gameManager.multiplier = 1;
         isOn = false;
+    }
+
+    private void Restart()
+    {
+        Debug.Log("Reiniciando");
+
+        TaskBarTurnOff();
+        Invoke(nameof(TurnOnPc), 4);
     }
 }
