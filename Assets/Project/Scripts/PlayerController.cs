@@ -62,7 +62,9 @@ public class PlayerController : SanityController
         forward = _y * currentSpeed * transform.forward;
         vertical = new Vector3(0f, -gravity, 0f);
 
+        if (Input.GetKeyDown(KeyCode.C)) Crounch();
 
+        /*
         if (Input.GetKeyDown(KeyCode.C) && !isCrouching)
         {
             isCrouching = true;
@@ -80,9 +82,31 @@ public class PlayerController : SanityController
             transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
             currentSpeed = walkSpeed;
         }
+        */
 
         finalVelocity = strafe + forward + vertical;
         controller.Move(finalVelocity * Time.deltaTime);
+    }
+
+    public void Crounch()
+    {
+        if (!isCrouching)
+        {
+            isCrouching = true;
+
+            transform.localScale = new Vector3(transform.localScale.x, 0.7f, transform.localScale.z);
+            currentSpeed = crouchSpeed;
+        }
+        else
+        {
+            CanUp();
+            if (!CanUp()) return;
+
+            isCrouching = false;
+
+            transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
+            currentSpeed = walkSpeed;
+        }
     }
 
     private bool CanUp()

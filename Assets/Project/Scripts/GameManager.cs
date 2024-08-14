@@ -18,13 +18,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool timeIsRunning;
     public float multiplier;
 
-    [Header("Start New Day Variables")]
+    [Header("Day System Variables")]
     [SerializeField] private GameObject dayPointsPanel;
     [SerializeField] private Button startNextDay;
+    [SerializeField] private Transform newDayPos;
+    [SerializeField] private Transform playerPos;
+    [SerializeField] private PlayerInteract playerInteract;
+    [SerializeField] private PlayerController playerControl;
 
     [Header("ONLY IN EDITOR VARIABLES")]
     public Button forceNewDay;
     public bool activeCursor;
+
+    private void Awake()
+    {
+        playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
 
     private void Start()
     {
@@ -119,6 +128,9 @@ public class GameManager : MonoBehaviour
 
     private void DisplayDayPoints()
     {
+        playerControl.canMove = false;
+        ChangePlayerPos();
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -134,10 +146,23 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        playerInteract.canInteract = false;
+        playerInteract.alreadyInteract = false;
+        playerControl.isSitting = false;
+        playerControl.canMove = true;
+
+        if (playerControl.isCrouching) playerControl.Crounch();
+
         minutes = 19;
         timeElapse = 0;
         seconds = 0;
 
         timeIsRunning = true;
+    }
+
+    private void ChangePlayerPos()
+    {
+        playerPos.position = newDayPos.position;
+        print(playerPos.transform.position);
     }
 }
