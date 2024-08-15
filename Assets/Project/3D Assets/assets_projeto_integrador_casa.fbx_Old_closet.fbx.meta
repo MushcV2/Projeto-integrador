@@ -3,7 +3,32 @@ guid: 130509b80684bb7438eb952d9f3a6193
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: closet
+    second: {fileID: 2100000, guid: d5d5d14f782b40c4fab213131a747ad6, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: closet_basecolor
+    second: {fileID: 2800000, guid: ce679f7cfd243a244bca61fb19928e8e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: closet_metallic
+    second: {fileID: 2800000, guid: 0c63e83a9bdc128428d3f3fd5b01eac9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: closet_normal
+    second: {fileID: 2800000, guid: 3135bb68744007b41884b8a79ca2f1c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: closet_roughness
+    second: {fileID: 2800000, guid: fbed2f157686f2543b6a50bfdc0753f5, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

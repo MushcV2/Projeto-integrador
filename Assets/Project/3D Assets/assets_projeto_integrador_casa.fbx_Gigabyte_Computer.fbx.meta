@@ -3,7 +3,23 @@ guid: e5f4f4684884eef41921c34922ab338e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ComputerCase
+    second: {fileID: -9074737011880280549, guid: af840be87239a2241a06fe05014d1dd5,
+      type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ComputerCase_Diffuse
+    second: {fileID: 2800000, guid: 2d9c5e20d920d3a468df117f2dec15d4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ComputerCase_Roughness
+    second: {fileID: 2800000, guid: 0e6937f0f59150f418ffb91a753ce45e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

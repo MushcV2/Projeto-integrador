@@ -3,7 +3,27 @@ guid: 12c5c470099219d438fe4550df3d26da
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal sink
+    second: {fileID: 2100000, guid: faaf18d4139d06e4088ea1c0635b2184, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: simple metal faucet
+    second: {fileID: 2100000, guid: 5d5616b6154b3ba4abab427c3c4d5697, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: 5352355b83eb78548b9a93d83f45055e, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WoodFineDark004_NRM_3K
+    second: {fileID: 2800000, guid: 89bbc09c9dd8ffc469a62bc68f736aa6, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

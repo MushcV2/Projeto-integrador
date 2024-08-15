@@ -3,7 +3,42 @@ guid: b93e873a9355c4048b9d4a9fee094caf
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RGB LEDS
+    second: {fileID: 2100000, guid: 7ad1d9f3f7506bb4b8722f5ffb90f16f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Simple Marble Procedural
+    second: {fileID: 2100000, guid: 60b3937bd183cf44bbbafe6d93d6a289, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sink
+    second: {fileID: 2100000, guid: 13d1e540715e37948adf10458f3b8439, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tap chrome
+    second: {fileID: 2100000, guid: bd4cad85276b933448010161565f5862, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood Black UA
+    second: {fileID: 2100000, guid: 8d83811cfe1ea93418b76e047b50faa5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall
+    second: {fileID: 2100000, guid: 6743fd66d726a2943978a9a0c50ee849, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood063_2K_Roughness
+    second: {fileID: 2800000, guid: e4f2aa7f9d4a28949ba5bbc28538457c, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
