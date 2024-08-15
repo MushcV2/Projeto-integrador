@@ -25,7 +25,10 @@ public class Tasks : MonoBehaviour
     private void Update()
     {
         if (missionsCompletedCount == missions.Count)
+        {
             AllMissionsCompleted();
+            return;
+        }
 
         if (missionCompleted)
         {
@@ -37,18 +40,15 @@ public class Tasks : MonoBehaviour
 
             missionTXT.text = "Missao concluida";
             Invoke(nameof(RandomMission), 5);
-            return;
         }
     }
 
     private void RandomMission()
     {
-        if (missionsCompletedCount == missions.Count) return;
-
-        rng = Random.Range(0, missions.Count);
-
         IEnumerator NewMission()
         {
+            rng = Random.Range(0, missions.Count);
+
             while (missions[rng] == null)
             {
                 rng = Random.Range(0, missions.Count);
@@ -58,7 +58,6 @@ public class Tasks : MonoBehaviour
         StartCoroutine(NewMission());
 
         missionTXT.text = missions[rng];
-
         missions[rng] = null;
     }
 
@@ -82,9 +81,8 @@ public class Tasks : MonoBehaviour
 
     private void AllMissionsCompleted()
     {
+        CancelInvoke(nameof(RandomMission));
         missionTXT.text = "Todas as missões foram completas";
         rng = -1;
-
-        return;
     }
 }
