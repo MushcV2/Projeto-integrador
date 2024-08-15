@@ -36,7 +36,7 @@ public class Tasks : MonoBehaviour
             index = -1;
 
             missionTXT.text = "Missao concluida";
-            Invoke("RandomMission", 5);
+            Invoke(nameof(RandomMission), 5);
             return;
         }
     }
@@ -47,8 +47,15 @@ public class Tasks : MonoBehaviour
 
         rng = Random.Range(0, missions.Count);
 
-        while (missions[rng] == null)
-            rng = Random.Range(0, missions.Count);
+        IEnumerator NewMission()
+        {
+            while (missions[rng] == null)
+            {
+                rng = Random.Range(0, missions.Count);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        StartCoroutine(NewMission());
 
         missionTXT.text = missions[rng];
 

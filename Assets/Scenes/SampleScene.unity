@@ -5473,6 +5473,11 @@ PrefabInstance:
       propertyPath: clockPanel
       value: 
       objectReference: {fileID: 384844060}
+    - target: {fileID: 3229160020814328608, guid: 4b154e71850a64e4d9859701b221f30b,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 529986771}
     - target: {fileID: 8934499633367814329, guid: 4b154e71850a64e4d9859701b221f30b,
         type: 3}
       propertyPath: m_LocalPosition.x

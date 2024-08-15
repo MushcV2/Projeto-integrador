@@ -6,6 +6,7 @@ using TMPro;
 public class UseComputer : Item
 {
     [SerializeField] private GameObject chair;
+    [SerializeField] private GameManager gameManager;
 
     protected override void Start()
     {
@@ -22,6 +23,7 @@ public class UseComputer : Item
         clockPanel.SetActive(false);
 
         player.canMove = false;
+        gameManager.multiplier = 2f;
 
         cam.GetComponent<CameraController>().stopFollowing = true;
         StartCoroutine(UpdateRotCam(0.7f));
@@ -53,6 +55,7 @@ public class UseComputer : Item
         taskPanel.SetActive(true);
         clockPanel.SetActive(true);
 
+        gameManager.multiplier = 1f;
         playerInteract.alreadyInteract = true;
         playerInteract.interactObject = chair;
 
