@@ -5457,11 +5457,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2015239079}
     m_Modifications:
-    - target: {fileID: 2898619300922203603, guid: e8149325c6f857244a3aced0923283d5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4119643437873580897, guid: e8149325c6f857244a3aced0923283d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5552,19 +5547,8 @@ PrefabInstance:
       propertyPath: crossHair
       value: 
       objectReference: {fileID: 1219489408}
-    - target: {fileID: 8830003823886264133, guid: e8149325c6f857244a3aced0923283d5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8830003823886264133, guid: e8149325c6f857244a3aced0923283d5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.137
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5782352264055537799, guid: e8149325c6f857244a3aced0923283d5, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8149325c6f857244a3aced0923283d5, type: 3}
