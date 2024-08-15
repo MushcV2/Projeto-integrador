@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Day System Variables")]
     [SerializeField] private GameObject dayPointsPanel;
+    [SerializeField] private GameObject sanityHUD;
+    [SerializeField] private GameObject clockHUD;
+    [SerializeField] private GameObject taskHUD;
+    [SerializeField] private GameObject crosshairHUD;
+    [SerializeField] private GameObject computerChair;
+    [SerializeField] private GameObject computer;
     [SerializeField] private Button startNextDay;
     [SerializeField] private Transform newDayPos;
     [SerializeField] private Transform playerPos;
@@ -150,9 +156,20 @@ public class GameManager : MonoBehaviour
         playerInteract.alreadyInteract = false;
         playerControl.isSitting = false;
         playerControl.canMove = true;
+        Camera.main.GetComponent<CameraController>().stopFollowing = false;
+
+        computer.layer = LayerMask.NameToLayer("Default");
+        computerChair.layer = LayerMask.NameToLayer("Interact");
+
+        // ---ACTIVE HUD--- //
+        taskHUD.SetActive(true);
+        clockHUD.SetActive(true);
+        sanityHUD.SetActive(true);
+        crosshairHUD.SetActive(true);
 
         if (playerControl.isCrouching) playerControl.Crounch();
 
+        multiplier = 1;
         minutes = 19;
         timeElapse = 0;
         seconds = 0;

@@ -104,7 +104,7 @@ public class PlayerController : SanityController
 
             isCrouching = false;
 
-            transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, 0.96f, transform.localScale.z);
             currentSpeed = walkSpeed;
         }
     }
