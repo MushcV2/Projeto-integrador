@@ -45,20 +45,24 @@ public class Tasks : MonoBehaviour
 
     private void RandomMission()
     {
+        print("Missao aleatoria");
+
         IEnumerator NewMission()
         {
             rng = Random.Range(0, missions.Count);
-
             while (missions[rng] == null)
             {
                 rng = Random.Range(0, missions.Count);
+
                 yield return new WaitForSeconds(0.1f);
             }
+
+            missionTXT.text = missions[rng];
+
+            yield return new WaitForSeconds(0.05f);
+            missions[rng] = null;
         }
         StartCoroutine(NewMission());
-
-        missionTXT.text = missions[rng];
-        missions[rng] = null;
     }
 
     public void MissionCompleted(int _index)
@@ -76,6 +80,7 @@ public class Tasks : MonoBehaviour
 
     private void CompletedCountAdd()
     {
+        CancelInvoke(nameof(CompletedCountAdd));
         missionsCompletedCount++;
     }
 
@@ -83,6 +88,5 @@ public class Tasks : MonoBehaviour
     {
         CancelInvoke(nameof(RandomMission));
         missionTXT.text = "Todas as missões foram completas";
-        rng = -1;
     }
 }
