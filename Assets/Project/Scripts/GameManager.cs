@@ -44,8 +44,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(LostSanity());
-        dayTXT.text = "Dia: " + days;
-        dayComputerTXT.text = "Dia: " + days;
+
+        dayTXT.text = dayTXT.text.Split(';')[0] + " " + days;
+        dayComputerTXT.text = dayComputerTXT.text.Split(';')[0] + " " + days;
 
         timeIsRunning = true;
 
@@ -119,8 +120,8 @@ public class GameManager : MonoBehaviour
 
         DisplayDayPoints();
 
-        dayTXT.text = "Dia: " + days;
-        dayComputerTXT.text = "Dia: " + days;
+        dayTXT.text = dayTXT.text.Split(';')[0] + " " + dayTXT;
+        dayComputerTXT.text = dayComputerTXT.text.Split(';')[0] + " " + dayTXT;
     }
 
     private IEnumerator LostSanity()

@@ -31,7 +31,7 @@ public class TaskBar : MonoBehaviour
         {
             menuIsActive = true;
             menuPanel.SetActive(true);
-            Invoke(nameof(ActiveSystemInfo), 0.35f);
+            Invoke(nameof(ActiveSystemInfo), 0.25f);
 
             anim.SetTrigger("Active");
 

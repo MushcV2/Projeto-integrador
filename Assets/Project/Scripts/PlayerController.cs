@@ -64,26 +64,6 @@ public class PlayerController : SanityController
 
         if (Input.GetKeyDown(KeyCode.C)) Crounch();
 
-        /*
-        if (Input.GetKeyDown(KeyCode.C) && !isCrouching)
-        {
-            isCrouching = true;
-
-            transform.localScale = new Vector3(transform.localScale.x, 0.7f, transform.localScale.z);
-            currentSpeed = crouchSpeed;
-        }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            CanUp();
-            if (!CanUp()) return;
-
-            isCrouching = false;
-
-            transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
-            currentSpeed = walkSpeed;
-        }
-        */
-
         finalVelocity = strafe + forward + vertical;
         controller.Move(finalVelocity * Time.deltaTime);
     }
