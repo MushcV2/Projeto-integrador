@@ -15,7 +15,6 @@ public class AppsManager : MonoBehaviour
         windowPanel = transform.Find("Window");
         windowPanel.gameObject.SetActive(false);
 
-        windowRect = windowPanel.gameObject.GetComponent<RectTransform>();
         initialPos = windowRect.position;
     }
 
@@ -39,5 +38,7 @@ public class AppsManager : MonoBehaviour
         windowRect.position = initialPos;
 
         GetComponent<Button>().enabled = true;
+
+        Debug.Log("Desativado");
     }
 }

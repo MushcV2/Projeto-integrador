@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private PlayerController playerControl;
+    private string[] textParts;
+
+
+    [Header("Parazon Delivery Point")]
+    [SerializeField] private GameObject itemsPoint;
 
     [Header("ONLY IN EDITOR VARIABLES")]
     public Button forceNewDay;
@@ -45,12 +50,18 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(LostSanity());
 
+        textParts = dayTXT.text.Split(';');
+        dayTXT.text = textParts[0] + " " + days;
+        dayComputerTXT.text = textParts[0] + " " + days;
+        /*
         dayTXT.text = dayTXT.text.Split(';')[0] + " " + days;
         dayComputerTXT.text = dayComputerTXT.text.Split(';')[0] + " " + days;
+        */
 
         timeIsRunning = true;
 
         dayPointsPanel.SetActive(false);
+        itemsPoint.SetActive(false);
 
         startNextDay.onClick.AddListener(StartNewDay);
         forceNewDay.onClick.AddListener(DayCycle);
@@ -120,8 +131,8 @@ public class GameManager : MonoBehaviour
 
         DisplayDayPoints();
 
-        dayTXT.text = dayTXT.text.Split(';')[0] + " " + dayTXT;
-        dayComputerTXT.text = dayComputerTXT.text.Split(';')[0] + " " + dayTXT;
+        dayTXT.text = textParts[0] + " " + days;
+        dayComputerTXT.text = textParts[0] + " " + days;
     }
 
     private IEnumerator LostSanity()
@@ -142,6 +153,9 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         dayPointsPanel.SetActive(true);
+
+        if (itemsPoint.transform.parent.childCount != 0) itemsPoint.SetActive(true);
+        else itemsPoint.SetActive(false);
     }
 
     private void StartNewDay()

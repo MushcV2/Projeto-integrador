@@ -8,7 +8,7 @@ public class ComputerSystem : MonoBehaviour
     [Header("Computer Variables")]
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController player;
-    [SerializeField] private AppsManager appsManager;
+    [SerializeField] private AppsManager[] appsManager;
     [SerializeField] private Button turnOnButton;
     [SerializeField] private Button taskBarTurnOff;
     [SerializeField] private Button restartTaskBar;
@@ -45,7 +45,10 @@ public class ComputerSystem : MonoBehaviour
             screenPanel.GetComponent<Animator>().SetTrigger("TurnOff");
             taskBarPanel.transform.Find("SystemMenu").gameObject.SetActive(false);
 
-            appsManager.CloseWindow();
+            foreach (var app in appsManager)
+            {
+                app.CloseWindow();
+            }
             appsPanel.SetActive(false);
 
             Invoke(nameof(CanTurnOff), 2);
@@ -80,7 +83,10 @@ public class ComputerSystem : MonoBehaviour
         screenPanel.GetComponent<Animator>().SetTrigger("TurnOff");
         taskBarPanel.transform.Find("SystemMenu").gameObject.SetActive(false);
 
-        appsManager.CloseWindow();
+        foreach (var app in appsManager)
+        {
+            app.CloseWindow();
+        }
         appsPanel.SetActive(false);
 
         Invoke(nameof(CanTurnOff), 2);

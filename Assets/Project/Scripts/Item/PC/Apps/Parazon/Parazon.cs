@@ -37,7 +37,9 @@ public class Parazon : AppsManager
 
         foreach (GameObject _item in itemsCart)
         {
-            Instantiate(_item, deliveryPoint.position, Quaternion.identity);
+            GameObject _object = Instantiate(_item, deliveryPoint.position, Quaternion.identity);
+            _object.transform.parent = deliveryPoint.transform.Find("Items");
+
             Debug.Log("Item Comprado");
         }
         itemsCart.Clear();
