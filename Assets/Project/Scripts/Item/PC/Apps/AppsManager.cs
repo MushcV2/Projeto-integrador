@@ -10,7 +10,7 @@ public class AppsManager : MonoBehaviour
     [SerializeField] private RectTransform windowRect;
     [SerializeField] private Vector3 initialPos;
 
-    private void Awake()
+    protected void Awake()
     {
         windowPanel = transform.Find("Window");
         windowPanel.gameObject.SetActive(false);
@@ -19,7 +19,7 @@ public class AppsManager : MonoBehaviour
         initialPos = windowRect.position;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         GetComponent<Button>().onClick.AddListener(OpenWindow);
         windowPanel.GetComponentInChildren<Button>().onClick.AddListener(CloseWindow);
