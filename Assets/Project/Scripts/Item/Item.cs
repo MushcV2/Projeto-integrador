@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
 {
     [Header("Item Variables")]
     [SerializeField] protected Tasks task;
-    [SerializeField] protected TMP_Text usableItem;
+    [SerializeField] protected TMP_Text popUpUsable;
     [SerializeField] protected Collider objectCollider;
     [SerializeField] protected PlayerInteract playerInteract;
     [SerializeField] protected PlayerController player;
@@ -30,6 +30,7 @@ public class Item : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         task = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<Tasks>();
         itemPos = GameObject.FindGameObjectWithTag("ItemPos").GetComponent<Transform>();
+        popUpUsable = FindAnyObjectByType<Canvas>().transform.Find("UsableTXT").GetComponent<TextMeshProUGUI>();
     }
 
     protected virtual void Start()
@@ -37,13 +38,13 @@ public class Item : MonoBehaviour
         objectCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
 
-        if (usable) usableItem.gameObject.SetActive(false);
+        if (usable) popUpUsable.gameObject.SetActive(false);
     }
 
     public virtual void InteractFunction()
     {
-        if (usable && usableItem != null)
-            usableItem.gameObject.SetActive(true);
+        if (usable && popUpUsable != null)
+            popUpUsable.gameObject.SetActive(true);
 
         rb.isKinematic = true;
         rb.useGravity = false;
@@ -58,8 +59,8 @@ public class Item : MonoBehaviour
 
     public virtual void StopInteract()
     {
-        if (usable && usableItem != null)
-            usableItem.gameObject.SetActive(false);
+        if (usable && popUpUsable != null)
+            popUpUsable.gameObject.SetActive(false);
 
         rb.isKinematic = false;
         rb.useGravity = true;
@@ -81,8 +82,8 @@ public class Item : MonoBehaviour
             StopInteract();
             playerInteract.alreadyInteract = false;
 
-            if (usable && usableItem != null)
-                usableItem.gameObject.SetActive(false);
+            if (usable && popUpUsable != null)
+                popUpUsable.gameObject.SetActive(false);
         }
     }
 

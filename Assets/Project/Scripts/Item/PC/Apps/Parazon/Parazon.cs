@@ -7,6 +7,7 @@ public class Parazon : AppsManager
 {
     [SerializeField] private Button confirmItem;
     [SerializeField] private Button[] itemsButton;
+    [SerializeField] private Transform deliveryPoint;
     [SerializeField] private List<GameObject> itemsCart;
 
     protected override void Start()
@@ -14,26 +15,31 @@ public class Parazon : AppsManager
         base.Start();
 
         confirmItem.onClick.AddListener(ConfirmBuy);
+        deliveryPoint = GameObject.FindGameObjectWithTag("ItemsDelivery").transform;
 
         foreach (Button _button in itemsButton)
         {
-            _button.onClick.AddListener(() => ClickOnItem(_button));
+            _button.onClick.AddListener(() => BuyItem(_button.GetComponent<ItemIndex>().index, _button.GetComponent<ItemIndex>().item));
         }
+    }
+
+    private void BuyItem(int _index, GameObject _itemOBJ)
+    {
+        Debug.Log("O item comprado tem o index de: " +  _index);
+        itemsCart.Add(_itemOBJ);
     }
 
     private void ConfirmBuy()
     {
+        if (itemsCart.Count == 0) return;
+
         Debug.Log("Confirmado");
-    }
 
-    private void ClickOnItem(Button _button)
-    {
-        Debug.Log("Botao clicado");
-        BuyItem(_button.GetComponent<ItemIndex>().index);
-    }
-
-    private void BuyItem(int _index)
-    {
-        Debug.Log("O item comprado tem o index de: " +  _index);
+        foreach (GameObject _item in itemsCart)
+        {
+            Instantiate(_item, deliveryPoint.position, Quaternion.identity);
+            Debug.Log("Item Comprado");
+        }
+        itemsCart.Clear();
     }
 }

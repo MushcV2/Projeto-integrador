@@ -5,4 +5,5 @@ using UnityEngine;
 public class ItemIndex : MonoBehaviour
 {
     public int index;
+    public GameObject item;
 }

@@ -10,7 +10,7 @@ public class UseItem : Item
         if (Input.GetKeyDown(KeyCode.F) && objectCollider.isTrigger && usable)
         {
             playerInteract.alreadyInteract = false;
-            usableItem.gameObject.SetActive(false);
+            popUpUsable.gameObject.SetActive(false);
 
             task.MissionCompleted(itemIndex);
 
