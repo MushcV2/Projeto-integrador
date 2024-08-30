@@ -30,7 +30,7 @@ public class Item : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         task = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<Tasks>();
         itemPos = GameObject.FindGameObjectWithTag("ItemPos").GetComponent<Transform>();
-        popUpUsable = FindAnyObjectByType<Canvas>().transform.Find("UsableTXT").GetComponent<TextMeshProUGUI>();
+        //popUpUsable = FindAnyObjectByType<Canvas>().transform.Find("UsableTXT").GetComponent<TextMeshProUGUI>();
     }
 
     protected virtual void Start()

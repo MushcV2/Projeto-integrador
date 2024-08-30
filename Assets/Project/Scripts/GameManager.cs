@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeElapse;
     [SerializeField] private float seconds;
     [SerializeField] private int minutes;
-    [SerializeField] private int days;
+    public int days;
     [SerializeField] private bool timeIsRunning;
     public float multiplier;
 
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         dayPointsPanel.SetActive(true);
-        if (itemsPoint.parent != null) itemsPoint.gameObject.SetActive(true);
+        itemsPoint.gameObject.SetActive(true);
     }
 
     private void StartNewDay()
@@ -185,14 +185,5 @@ public class GameManager : MonoBehaviour
         seconds = 0;
 
         timeIsRunning = true;
-    }
-
-    private IEnumerator DestroyItems()
-    {
-        foreach (var _item in itemsPoint.GetComponentsInParent<GameObject>())
-        {
-            Destroy(_item);
-            yield return new WaitForSeconds(0.15f);
-        }
     }
 }

@@ -9,6 +9,8 @@ public class Parazon : AppsManager
     [SerializeField] private Button[] itemsButton;
     [SerializeField] private Transform deliveryPoint;
     [SerializeField] private List<GameObject> itemsCart;
+    [SerializeField] private GameManager gameManager;
+    private int destroyItemsDay;
 
     protected override void Start()
     {
@@ -22,6 +24,19 @@ public class Parazon : AppsManager
         }
     }
 
+    private void Update()
+    {
+        if (gameManager.days == destroyItemsDay && deliveryPoint.childCount != 0)
+        {
+            Debug.Log("Dia de destruir os itens");
+
+            for (int i = 0; i < deliveryPoint.childCount; i++)
+            {
+                Destroy(deliveryPoint.GetChild(i).gameObject);
+            }
+        }
+    }
+
     private void BuyItem(int _index, GameObject _itemOBJ)
     {
         Debug.Log("O item comprado tem o index de: " +  _index);
@@ -31,6 +46,8 @@ public class Parazon : AppsManager
     private IEnumerator ConfirmBuy()
     {
         if (itemsCart.Count == 0) StopCoroutine(ConfirmBuy());
+
+        destroyItemsDay = gameManager.days + 2;
 
         Debug.Log("Confirmado");
 
