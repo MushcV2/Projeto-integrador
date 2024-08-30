@@ -33,9 +33,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController playerControl;
     private string[] textParts;
 
-
     [Header("Parazon Delivery Point")]
-    [SerializeField] private GameObject itemsPoint;
+    [SerializeField] private Transform itemsPoint;
 
     [Header("ONLY IN EDITOR VARIABLES")]
     public Button forceNewDay;
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        itemsPoint.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -53,15 +53,11 @@ public class GameManager : MonoBehaviour
         textParts = dayTXT.text.Split(';');
         dayTXT.text = textParts[0] + " " + days;
         dayComputerTXT.text = textParts[0] + " " + days;
-        /*
-        dayTXT.text = dayTXT.text.Split(';')[0] + " " + days;
-        dayComputerTXT.text = dayComputerTXT.text.Split(';')[0] + " " + days;
-        */
 
         timeIsRunning = true;
 
         dayPointsPanel.SetActive(false);
-        itemsPoint.SetActive(false);
+        itemsPoint.gameObject.SetActive(false);
 
         startNextDay.onClick.AddListener(StartNewDay);
         forceNewDay.onClick.AddListener(DayCycle);
@@ -126,6 +122,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Dia passou");
 
+        itemsPoint.gameObject.SetActive(false);
         timeIsRunning = false;
         days++;
 
@@ -147,15 +144,13 @@ public class GameManager : MonoBehaviour
     private void DisplayDayPoints()
     {
         playerControl.canMove = false;
-        ChangePlayerPos();
+        playerPos.position = newDayPos.position;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         dayPointsPanel.SetActive(true);
-
-        if (itemsPoint.transform.parent.childCount != 0) itemsPoint.SetActive(true);
-        else itemsPoint.SetActive(false);
+        if (itemsPoint.parent != null) itemsPoint.gameObject.SetActive(true);
     }
 
     private void StartNewDay()
@@ -192,9 +187,12 @@ public class GameManager : MonoBehaviour
         timeIsRunning = true;
     }
 
-    private void ChangePlayerPos()
+    private IEnumerator DestroyItems()
     {
-        playerPos.position = newDayPos.position;
-        print(playerPos.transform.position);
+        foreach (var _item in itemsPoint.GetComponentsInParent<GameObject>())
+        {
+            Destroy(_item);
+            yield return new WaitForSeconds(0.15f);
+        }
     }
 }

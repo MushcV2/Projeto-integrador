@@ -14,8 +14,7 @@ public class Parazon : AppsManager
     {
         base.Start();
 
-        confirmItem.onClick.AddListener(ConfirmBuy);
-        deliveryPoint = GameObject.FindGameObjectWithTag("ItemsDelivery").transform;
+        confirmItem.onClick.AddListener(() => StartCoroutine(ConfirmBuy()));
 
         foreach (Button _button in itemsButton)
         {
@@ -29,16 +28,18 @@ public class Parazon : AppsManager
         itemsCart.Add(_itemOBJ);
     }
 
-    private void ConfirmBuy()
+    private IEnumerator ConfirmBuy()
     {
-        if (itemsCart.Count == 0) return;
+        if (itemsCart.Count == 0) StopCoroutine(ConfirmBuy());
 
         Debug.Log("Confirmado");
 
         foreach (GameObject _item in itemsCart)
         {
             GameObject _object = Instantiate(_item, deliveryPoint.position, Quaternion.identity);
-            _object.transform.parent = deliveryPoint.transform.Find("Items");
+            _object.transform.parent = deliveryPoint.transform;
+
+            yield return new WaitForSeconds(0.25f);
 
             Debug.Log("Item Comprado");
         }
