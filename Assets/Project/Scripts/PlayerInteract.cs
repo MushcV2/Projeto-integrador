@@ -37,7 +37,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (!alreadyInteract)
             {
-                canInteract = true;
+                canInteract = true; 
                 interactObject = _hit.collider.gameObject;
             }
         }
