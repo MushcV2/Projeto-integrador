@@ -31,11 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private PlayerController playerControl;
+    public Parazon parazon;
     private string[] textParts;
-    private Parazon parazon;
-
-    [Header("Parazon Delivery Point")]
-    [SerializeField] private Transform itemsPoint;
 
     [Header("ONLY IN EDITOR VARIABLES")]
     public Button forceNewDay;
@@ -44,7 +41,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        itemsPoint.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -58,7 +54,6 @@ public class GameManager : MonoBehaviour
         timeIsRunning = true;
 
         dayPointsPanel.SetActive(false);
-        itemsPoint.gameObject.SetActive(false);
 
         startNextDay.onClick.AddListener(StartNewDay);
         forceNewDay.onClick.AddListener(DayCycle);
@@ -123,7 +118,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Dia passou");
 
-        itemsPoint.gameObject.SetActive(false);
         timeIsRunning = false;
         days++;
 
@@ -133,24 +127,14 @@ public class GameManager : MonoBehaviour
         dayComputerTXT.text = textParts[0] + " " + days;
     }
 
-    private IEnumerator LostSanity()
-    {
-        yield return new WaitForSeconds(10);
-        sanity.LostSanity(2);
-
-        yield return new WaitForSeconds(10);
-        StartCoroutine(LostSanity());
-    }
-
     private void DisplayDayPoints()
     {
         playerControl.canMove = false;
         playerPos.position = newDayPos.position;
 
-        if (parazon != null) parazon.DestroyItems();
-        else
+        if (parazon != null)
         {
-            parazon = FindAnyObjectByType<Parazon>();
+            parazon.DeliverItems();
             parazon.DestroyItems();
         }
 
@@ -158,7 +142,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         dayPointsPanel.SetActive(true);
-        itemsPoint.gameObject.SetActive(true);
     }
 
     private void StartNewDay()
@@ -195,4 +178,14 @@ public class GameManager : MonoBehaviour
 
         timeIsRunning = true;
     }
+
+    private IEnumerator LostSanity()
+    {
+        yield return new WaitForSeconds(10);
+        sanity.LostSanity(2);
+
+        yield return new WaitForSeconds(10);
+        StartCoroutine(LostSanity());
+    }
+
 }

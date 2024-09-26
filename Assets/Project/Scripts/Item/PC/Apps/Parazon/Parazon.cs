@@ -8,10 +8,10 @@ public class Parazon : AppsManager
 {
     [SerializeField] private Button confirmItem;
     [SerializeField] private Button[] itemsButton;
-    [SerializeField] private Transform deliveryPoint;
+    [SerializeField] public Transform deliveryPoint;
     [SerializeField] private List<GameObject> itemsCart;
     [SerializeField] private GameManager gameManager;
-    private int destroyItemsDay;
+    public Transform waitingToDelivery;
 
     protected override void Start()
     {
@@ -23,6 +23,9 @@ public class Parazon : AppsManager
         {
             _button.onClick.AddListener(() => BuyItem(_button.GetComponent<ItemIndex>().index, _button.GetComponent<ItemIndex>().item));
         }
+
+        FindObjectOfType<GameManager>().parazon = this;
+        waitingToDelivery.gameObject.SetActive(false);
     }
 
     private void BuyItem(int _index, GameObject _itemOBJ)
@@ -39,14 +42,14 @@ public class Parazon : AppsManager
             yield break;
         }
 
-        destroyItemsDay = gameManager.days + 2;
-
         Debug.Log("Confirmado");
 
         foreach (GameObject _item in itemsCart)
         {
-            GameObject _object = Instantiate(_item, deliveryPoint.position, Quaternion.identity);
-            _object.transform.parent = deliveryPoint.transform;
+            GameObject _object = Instantiate(_item, waitingToDelivery.position, Quaternion.identity);
+
+            _object.GetComponent<Item>().dayToDestroy = gameManager.days + 2;
+            _object.transform.parent = waitingToDelivery;
 
             yield return new WaitForSeconds(0.25f);
 
@@ -55,20 +58,25 @@ public class Parazon : AppsManager
         itemsCart.Clear();
     }
 
+    public void DeliverItems()
+    {
+        foreach (Transform _item in waitingToDelivery.GetComponentsInChildren<Transform>().Skip(1))
+            _item.parent = deliveryPoint;
+
+        Debug.Log("Items entregues");
+    }
+
     public void DestroyItems()
     {
         Debug.Log("Destruir items chamado");
 
-        if (gameManager.days != destroyItemsDay)
+        foreach (Transform _item in deliveryPoint.GetComponentsInChildren<Transform>().Skip(1))
         {
-            Debug.Log("Ainda nao é o dia da destruição");
-            return;
-        }
-
-        foreach (Transform _item in deliveryPoint.GetComponentsInParent<Transform>().Skip(1))
-        {
-            Destroy(_item.gameObject);
-            Debug.Log($"{_item.gameObject.name} item destruido");
+            if (_item.gameObject.GetComponent<Item>().dayToDestroy == gameManager.days)
+            {
+                Destroy(_item.gameObject);
+                Debug.Log($"Item {_item.gameObject.name} destruido");
+            }
         }
     }
 }

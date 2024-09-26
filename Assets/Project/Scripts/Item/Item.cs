@@ -23,6 +23,7 @@ public class Item : MonoBehaviour
     [SerializeField] protected int itemIndex;
     [SerializeField] protected bool usable;
     [SerializeField] protected bool canOpen;
+    public int dayToDestroy;
 
     protected void Awake()
     {
