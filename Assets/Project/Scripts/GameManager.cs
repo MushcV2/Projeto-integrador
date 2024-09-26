@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeElapse;
     [SerializeField] private float seconds;
     [SerializeField] private int minutes;
-    public int days;
     [SerializeField] private bool timeIsRunning;
+    public int days;
     public float multiplier;
 
     [Header("Day System Variables")]
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private PlayerController playerControl;
     private string[] textParts;
+    private Parazon parazon;
 
     [Header("Parazon Delivery Point")]
     [SerializeField] private Transform itemsPoint;
@@ -146,6 +147,13 @@ public class GameManager : MonoBehaviour
         playerControl.canMove = false;
         playerPos.position = newDayPos.position;
 
+        if (parazon != null) parazon.DestroyItems();
+        else
+        {
+            parazon = FindAnyObjectByType<Parazon>();
+            parazon.DestroyItems();
+        }
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -166,6 +174,7 @@ public class GameManager : MonoBehaviour
         playerInteract.alreadyInteract = false;
         playerControl.isSitting = false;
         playerControl.canMove = true;
+
         Camera.main.GetComponent<CameraController>().stopFollowing = false;
 
         computer.layer = LayerMask.NameToLayer("Default");

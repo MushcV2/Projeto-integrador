@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,19 +25,6 @@ public class Parazon : AppsManager
         }
     }
 
-    private void Update()
-    {
-        if (gameManager.days == destroyItemsDay && deliveryPoint.childCount != 0)
-        {
-            Debug.Log("Dia de destruir os itens");
-
-            for (int i = 0; i < deliveryPoint.childCount; i++)
-            {
-                Destroy(deliveryPoint.GetChild(i).gameObject);
-            }
-        }
-    }
-
     private void BuyItem(int _index, GameObject _itemOBJ)
     {
         Debug.Log("O item comprado tem o index de: " +  _index);
@@ -45,7 +33,11 @@ public class Parazon : AppsManager
 
     private IEnumerator ConfirmBuy()
     {
-        if (itemsCart.Count == 0) StopCoroutine(ConfirmBuy());
+        if (itemsCart.Count == 0)
+        {
+            Debug.Log("Sem itens");
+            yield break;
+        }
 
         destroyItemsDay = gameManager.days + 2;
 
@@ -61,5 +53,22 @@ public class Parazon : AppsManager
             Debug.Log("Item Comprado");
         }
         itemsCart.Clear();
+    }
+
+    public void DestroyItems()
+    {
+        Debug.Log("Destruir items chamado");
+
+        if (gameManager.days != destroyItemsDay)
+        {
+            Debug.Log("Ainda nao é o dia da destruição");
+            return;
+        }
+
+        foreach (Transform _item in deliveryPoint.GetComponentsInParent<Transform>().Skip(1))
+        {
+            Destroy(_item.gameObject);
+            Debug.Log($"{_item.gameObject.name} item destruido");
+        }
     }
 }
