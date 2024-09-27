@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class Parazon : AppsManager
 {
     [SerializeField] private Button confirmItem;
     [SerializeField] private Button[] itemsButton;
+    [SerializeField] private TMP_Text cartCountTXT;
     [SerializeField] public Transform deliveryPoint;
     [SerializeField] private List<GameObject> itemsCart;
     [SerializeField] private GameManager gameManager;
@@ -21,28 +23,30 @@ public class Parazon : AppsManager
 
         foreach (Button _button in itemsButton)
         {
-            _button.onClick.AddListener(() => BuyItem(_button.GetComponent<ItemIndex>().index, _button.GetComponent<ItemIndex>().item));
+            _button.onClick.AddListener(() => AddOnCart(_button.GetComponent<ItemIndex>().index, _button.GetComponent<ItemIndex>().item));
         }
 
         FindObjectOfType<GameManager>().parazon = this;
         waitingToDelivery.gameObject.SetActive(false);
+
+        cartCountTXT.text = "Empty";
     }
 
-    private void BuyItem(int _index, GameObject _itemOBJ)
+    private void AddOnCart(int _index, GameObject _itemOBJ)
     {
         Debug.Log("O item comprado tem o index de: " +  _index);
+
         itemsCart.Add(_itemOBJ);
+        cartCountTXT.text = itemsCart.Count.ToString();
     }
 
     private IEnumerator ConfirmBuy()
     {
-        if (itemsCart.Count == 0)
-        {
-            Debug.Log("Sem itens");
-            yield break;
-        }
+        if (itemsCart.Count == 0) yield break;
 
         Debug.Log("Confirmado");
+
+        cartCountTXT.text = "Empty";
 
         foreach (GameObject _item in itemsCart)
         {
@@ -55,6 +59,7 @@ public class Parazon : AppsManager
 
             Debug.Log("Item Comprado");
         }
+
         itemsCart.Clear();
     }
 
