@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class UseItem : Item
+public class ConsumeItem : ObjectsInteract
 {
     private void Update()
     {

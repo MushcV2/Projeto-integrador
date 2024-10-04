@@ -54,14 +54,14 @@ public class PlayerInteract : MonoBehaviour
 
             task.missionObject = interactObject.name;
 
-            if (interactObject != null) interactObject.GetComponent<Item>().InteractFunction();
+            if (interactObject != null) interactObject.GetComponent<ObjectsInteract>().InteractFunction();
         }
         else if (Input.GetKeyDown(KeyCode.E) && alreadyInteract || Input.GetKeyDown(KeyCode.E) && player.isSitting)
         {
             alreadyInteract = false;
             task.missionObject = null;
 
-            interactObject.GetComponent<Item>().StopInteract();
+            interactObject.GetComponent<ObjectsInteract>().StopInteract();
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UseChair : Item
+public class SitOnChair : ObjectsInteract
 {
     [SerializeField] private Transform newPos;
     [SerializeField] private GameObject computer;

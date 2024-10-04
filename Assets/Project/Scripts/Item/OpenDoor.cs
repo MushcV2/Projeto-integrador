@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenItem : Item
+public class OpenDoor : ObjectsInteract
 {
     [SerializeField] private Animator anim;
 

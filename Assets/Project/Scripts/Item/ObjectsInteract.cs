@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public class ObjectsInteract : MonoBehaviour
 {
     [Header("Item Variables")]
     [SerializeField] protected Tasks task;

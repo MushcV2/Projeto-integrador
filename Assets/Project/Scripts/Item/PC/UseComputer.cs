@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UseComputer : Item
+public class UseComputer : ObjectsInteract
 {
     [SerializeField] private GameObject chair;
     [SerializeField] private GameManager gameManager;

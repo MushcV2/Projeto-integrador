@@ -52,7 +52,7 @@ public class Parazon : AppsManager
         {
             GameObject _object = Instantiate(_item, waitingToDelivery.position, Quaternion.identity);
 
-            _object.GetComponent<Item>().dayToDestroy = gameManager.days + 2;
+            _object.GetComponent<ObjectsInteract>().dayToDestroy = gameManager.days + 2;
             _object.transform.parent = waitingToDelivery;
 
             yield return new WaitForSeconds(0.25f);
@@ -77,7 +77,7 @@ public class Parazon : AppsManager
 
         foreach (Transform _item in deliveryPoint.GetComponentsInChildren<Transform>().Skip(1))
         {
-            if (_item.gameObject.GetComponent<Item>().dayToDestroy == gameManager.days)
+            if (_item.gameObject.GetComponent<ObjectsInteract>().dayToDestroy == gameManager.days)
             {
                 Destroy(_item.gameObject);
                 Debug.Log($"Item {_item.gameObject.name} destruido");
