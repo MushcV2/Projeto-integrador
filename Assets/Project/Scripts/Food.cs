@@ -15,20 +15,21 @@ public class Food : ObjectsInteract
 
             Physics.Raycast(_ray, out RaycastHit _hit, 100);
 
-            Debug.Log(_hit.collider.gameObject.tag);
-
             if (_hit.collider.gameObject.CompareTag("Pan") && !_hit.collider.gameObject.GetComponent<Pan>().haveFood)
             {
                 playerInteract.forcePanel = true;
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    gameObject.layer = LayerMask.NameToLayer("Default");
+
                     transform.parent = _hit.transform;
                     transform.localPosition = Vector3.zero;
 
-                    Debug.Log("Nova position");
-
                     _hit.collider.gameObject.GetComponent<Pan>().haveFood = true;
+                    _hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                    StartCoroutine(_hit.collider.gameObject.GetComponent<Pan>().LayerToNormal());
+
                     alreadyInPan = true;
 
                     playerInteract.alreadyInteract = false;
@@ -48,5 +49,6 @@ public class Food : ObjectsInteract
     public override void StopInteract()
     {
         handlingItem = false;
+        playerInteract.forcePanel = false;
     }
 }

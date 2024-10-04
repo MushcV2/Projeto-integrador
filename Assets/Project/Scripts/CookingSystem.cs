@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CookingSystem : ObjectsInteract
 {
+    public Transform[] slots;
+
     public override void InteractFunction()
     {
         Debug.Log("Interagiu com o fogao");

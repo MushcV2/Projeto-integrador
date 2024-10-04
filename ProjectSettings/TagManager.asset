@@ -10,6 +10,7 @@ TagManager:
   - CompletedZone
   - ItemsDelivery
   - Pan
+  - Oven
   layers:
   - Default
   - TransparentFX

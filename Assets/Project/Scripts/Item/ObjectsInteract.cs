@@ -17,7 +17,7 @@ public class ObjectsInteract : MonoBehaviour
     [SerializeField] protected GameObject taskPanel;
     [SerializeField] protected GameObject clockPanel;
     [SerializeField] protected Camera cam;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] protected Rigidbody rb;
     [SerializeField] private Transform itemPos;
     [SerializeField] private Transform oldParent;
     [SerializeField] protected int itemIndex;

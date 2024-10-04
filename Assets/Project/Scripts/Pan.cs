@@ -5,6 +5,43 @@ using UnityEngine;
 public class Pan : ObjectsInteract
 {
     public bool haveFood;
+    private Vector3 originalScale;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        originalScale = transform.localScale;
+    }
+
+    private void Update()
+    {
+        if (playerInteract.interactObject == gameObject)
+        {
+            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(_ray, out RaycastHit _hit, 100f))
+            {
+                if (_hit.collider.CompareTag("Oven"))
+                {
+                    playerInteract.forcePanel = true;
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        int _rng = Random.Range(0, _hit.collider.gameObject.GetComponent<CookingSystem>().slots.Length);
+
+                        transform.parent = _hit.collider.gameObject.GetComponent<CookingSystem>().slots[_rng];
+                        transform.localPosition = Vector3.zero;
+                        transform.localScale = originalScale;
+
+                        playerInteract.forcePanel = false;
+                    }
+                }
+            }
+            else
+                playerInteract.forcePanel = false;
+        }
+    }
 
     public override void InteractFunction()
     {
@@ -13,6 +50,16 @@ public class Pan : ObjectsInteract
 
     public override void StopInteract()
     {
-        base.StopInteract();
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+        playerInteract.forcePanel = false;
+    }
+
+    public IEnumerator LayerToNormal()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        gameObject.layer = LayerMask.NameToLayer("Interact");
     }
 }
