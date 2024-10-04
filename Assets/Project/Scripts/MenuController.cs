@@ -16,6 +16,17 @@ public class MenuController : MonoBehaviour
     [Header("Pause UI")]
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Button closePauseScreen;
+    [SerializeField] private Button openPauseScreen;
+
+    [Header("Video UI")]
+    [SerializeField] private GameObject videoScreen;
+    [SerializeField] private Button closeVideoScreen;
+    [SerializeField] private Button openVideoScreen;
+
+    [Header("Audio UI")]
+    [SerializeField] private GameObject audioScreen;
+    [SerializeField] private Button closeAudioScreen;
+    [SerializeField] private Button openAudioScreen;
 
     //[Header("Variables")]
 
@@ -27,10 +38,20 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         configsBG.SetActive(false);
+        videoScreen.SetActive(false);
+        audioScreen.SetActive(false);
 
         playButton.onClick.AddListener(() => StartCoroutine(LoadGameScene()));
-        configsButton.onClick.AddListener(OpenConfigs);
-        closeConfigs.onClick.AddListener(CloseConfigs);
+
+        configsButton.onClick.AddListener(() => OpenScreen("config"));
+        closeConfigs.onClick.AddListener(() => CloseScreen("config"));
+
+        openVideoScreen.onClick.AddListener(() => OpenScreen("video"));
+        closeVideoScreen.onClick.AddListener(() => CloseScreen("video"));
+
+        openAudioScreen.onClick.AddListener(() => OpenScreen("audio"));
+        closeAudioScreen.onClick.AddListener(() => CloseScreen("audio")); 
+
         exitButton.onClick.AddListener(Exit);
     }
 
@@ -38,8 +59,10 @@ public class MenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Game")
         {
-            Debug.Log("Pausado");
-            pauseScreen.SetActive(true);
+            OpenScreen("pause");
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         if (Input.GetKeyDown(KeyCode.B)) StartCoroutine(LoadGameScene());
@@ -56,24 +79,56 @@ public class MenuController : MonoBehaviour
         pauseScreen = GameObject.Find("PauseScreen");
 
         closePauseScreen = pauseScreen.transform.Find("Close").GetComponent<Button>();
-        closePauseScreen.onClick.AddListener(ClosePauseScreen);
+        closePauseScreen.onClick.AddListener(() => CloseScreen("pause"));
 
         pauseScreen.SetActive(false);
     }
 
-    private void ClosePauseScreen()
+    private void OpenScreen(string _name)
     {
-        pauseScreen.SetActive(false);
+        switch (_name)
+        {
+            case "config":
+                configsBG.SetActive(true);
+                break;
+
+            case "pause":
+                pauseScreen.SetActive(true);
+                break;
+
+            case "video":
+                videoScreen.SetActive(true);
+                break;
+
+            case "audio":
+                audioScreen.SetActive(true);
+                break;
+        }
     }
 
-    private void OpenConfigs()
+    private void CloseScreen(string _name)
     {
-        configsBG.SetActive(true);
-    }
+        switch (_name)
+        {
+            case "config":
+                configsBG.SetActive(false);
+                break;
 
-    private void CloseConfigs()
-    {
-        configsBG.SetActive(false);
+            case "pause":
+                pauseScreen.SetActive(false);
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+
+            case "video":
+                videoScreen.SetActive(false);
+                break;
+
+            case "audio":
+                audioScreen.SetActive(false);
+                break;
+        }
     }
 
     private void Exit()
