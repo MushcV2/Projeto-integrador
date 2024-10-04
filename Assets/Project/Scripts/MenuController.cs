@@ -16,17 +16,22 @@ public class MenuController : MonoBehaviour
     [Header("Pause UI")]
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Button closePauseScreen;
-    [SerializeField] private Button openPauseScreen;
 
     [Header("Video UI")]
     [SerializeField] private GameObject videoScreen;
     [SerializeField] private Button closeVideoScreen;
     [SerializeField] private Button openVideoScreen;
+    [SerializeField] private Button low, mid, high;
 
     [Header("Audio UI")]
     [SerializeField] private GameObject audioScreen;
     [SerializeField] private Button closeAudioScreen;
     [SerializeField] private Button openAudioScreen;
+
+    [Header("Credits UI")]
+    [SerializeField] private GameObject creditsScreen;
+    [SerializeField] private Button closeCreditsScreen;
+    [SerializeField] private Button openCreditsScreen;
 
     //[Header("Variables")]
 
@@ -40,6 +45,7 @@ public class MenuController : MonoBehaviour
         configsBG.SetActive(false);
         videoScreen.SetActive(false);
         audioScreen.SetActive(false);
+        creditsScreen.SetActive(false);
 
         playButton.onClick.AddListener(() => StartCoroutine(LoadGameScene()));
 
@@ -48,9 +54,15 @@ public class MenuController : MonoBehaviour
 
         openVideoScreen.onClick.AddListener(() => OpenScreen("video"));
         closeVideoScreen.onClick.AddListener(() => CloseScreen("video"));
+        low.onClick.AddListener(() => ChangeGraphics(0));
+        mid.onClick.AddListener(() => ChangeGraphics(1));
+        high.onClick.AddListener(() => ChangeGraphics(2));
 
         openAudioScreen.onClick.AddListener(() => OpenScreen("audio"));
-        closeAudioScreen.onClick.AddListener(() => CloseScreen("audio")); 
+        closeAudioScreen.onClick.AddListener(() => CloseScreen("audio"));
+
+        openCreditsScreen.onClick.AddListener(() => OpenScreen("credits"));
+        closeCreditsScreen.onClick.AddListener(() => CloseScreen("credits"));
 
         exitButton.onClick.AddListener(Exit);
     }
@@ -103,6 +115,10 @@ public class MenuController : MonoBehaviour
             case "audio":
                 audioScreen.SetActive(true);
                 break;
+
+            case "credits":
+                creditsScreen.SetActive(true);
+                break;
         }
     }
 
@@ -128,7 +144,16 @@ public class MenuController : MonoBehaviour
             case "audio":
                 audioScreen.SetActive(false);
                 break;
+
+            case "credits":
+                creditsScreen.SetActive(false);
+                break;
         }
+    }
+
+    private void ChangeGraphics(int _value)
+    {
+        QualitySettings.SetQualityLevel(_value);
     }
 
     private void Exit()
