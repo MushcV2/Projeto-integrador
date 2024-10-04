@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CookingSystem : ObjectsInteract
+public class Pan : ObjectsInteract
 {
+    public bool haveFood;
+
     public override void InteractFunction()
     {
-        Debug.Log("Interagiu com o fogao");
+        base.InteractFunction();
     }
 
     public override void StopInteract()
     {
-        Debug.Log("Parou de interagir");
+        base.StopInteract();
     }
 }

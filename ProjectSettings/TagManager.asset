@@ -9,6 +9,7 @@ TagManager:
   - ItemPos
   - CompletedZone
   - ItemsDelivery
+  - Pan
   layers:
   - Default
   - TransparentFX

@@ -48,8 +48,8 @@ public class ObjectsInteract : MonoBehaviour
             popUpUsable.gameObject.SetActive(true);
 
         rb.isKinematic = true;
-        rb.useGravity = false;
         objectCollider.isTrigger = true;
+        rb.useGravity = false;
 
         transform.parent = itemPos;
         transform.position = itemPos.position;

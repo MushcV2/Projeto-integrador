@@ -13,6 +13,7 @@ public class PlayerInteract : MonoBehaviour
     public GameObject interactPanel;
     public bool canInteract;
     public bool alreadyInteract;
+    public bool forcePanel;
 
     private void Start()
     {
@@ -67,7 +68,10 @@ public class PlayerInteract : MonoBehaviour
 
     public void ActivePanel()
     {
-        if (canInteract && !alreadyInteract)
+        if (forcePanel)
+            interactPanel.SetActive(true);
+
+        else if (canInteract && !alreadyInteract)
             interactPanel.SetActive(true);
 
         else
