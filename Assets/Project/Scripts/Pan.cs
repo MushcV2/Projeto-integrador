@@ -30,9 +30,8 @@ public class Pan : ObjectsInteract
                     {
                         int _rng = Random.Range(0, _hit.collider.gameObject.GetComponent<CookingSystem>().slots.Length);
 
-                        transform.parent = _hit.collider.gameObject.GetComponent<CookingSystem>().slots[_rng];
+                        transform.SetParent(_hit.collider.gameObject.GetComponent<CookingSystem>().slots[_rng], true);
                         transform.localPosition = Vector3.zero;
-                        transform.localScale = originalScale;
 
                         playerInteract.forcePanel = false;
                     }
