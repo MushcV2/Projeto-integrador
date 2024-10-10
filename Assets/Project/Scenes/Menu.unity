@@ -583,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &249191389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -680,7 +680,7 @@ RectTransform:
   m_Father: {fileID: 1374058123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1216,9 +1216,10 @@ MonoBehaviour:
   haveMotionBlur: {fileID: 352024604}
   closeVideoScreen: {fileID: 1967168430}
   openVideoScreen: {fileID: 1241400727}
-  low: {fileID: 1756823146}
-  mid: {fileID: 1761143351}
-  high: {fileID: 482099474}
+  graphicsButton:
+  - {fileID: 1756823146}
+  - {fileID: 1761143351}
+  - {fileID: 482099474}
   audioScreen: {fileID: 1102671662}
   closeAudioScreen: {fileID: 1867051006}
   openAudioScreen: {fileID: 995733935}
@@ -2337,7 +2338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1102671663
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4668,7 +4669,7 @@ RectTransform:
   m_Father: {fileID: 465508344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

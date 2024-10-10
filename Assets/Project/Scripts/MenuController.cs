@@ -22,7 +22,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Toggle haveMotionBlur;
     [SerializeField] private Button closeVideoScreen;
     [SerializeField] private Button openVideoScreen;
-    [SerializeField] private Button low, mid, high;
+    [SerializeField] private Button[] graphicsButton;
 
     [Header("Audio UI")]
     [SerializeField] private GameObject audioScreen;
@@ -55,18 +55,32 @@ public class MenuController : MonoBehaviour
         configsButton.onClick.AddListener(() => OpenScreen("config"));
         closeConfigs.onClick.AddListener(() => CloseScreen("config"));
 
+        #region Video Screen
+
         openVideoScreen.onClick.AddListener(() => OpenScreen("video"));
         closeVideoScreen.onClick.AddListener(() => CloseScreen("video"));
-        low.onClick.AddListener(() => ChangeGraphics(0));
-        mid.onClick.AddListener(() => ChangeGraphics(1));
-        high.onClick.AddListener(() => ChangeGraphics(2));
+
+        graphicsButton[0].onClick.AddListener(() => ChangeGraphics(0));
+        graphicsButton[1].onClick.AddListener(() => ChangeGraphics(1));
+        graphicsButton[2].onClick.AddListener(() => ChangeGraphics(2));
+
         haveMotionBlur.onValueChanged.AddListener(MotionBlur);
+
+        #endregion
+
+        #region Audio Screen
 
         openAudioScreen.onClick.AddListener(() => OpenScreen("audio"));
         closeAudioScreen.onClick.AddListener(() => CloseScreen("audio"));
 
+        #endregion
+
+        #region Credits Screen
+
         openCreditsScreen.onClick.AddListener(() => OpenScreen("credits"));
         closeCreditsScreen.onClick.AddListener(() => CloseScreen("credits"));
+
+        #endregion
 
         exitButton.onClick.AddListener(Exit);
 
