@@ -19,6 +19,7 @@ public class MenuController : MonoBehaviour
 
     [Header("Video UI")]
     [SerializeField] private GameObject videoScreen;
+    [SerializeField] private Toggle haveMotionBlur;
     [SerializeField] private Button closeVideoScreen;
     [SerializeField] private Button openVideoScreen;
     [SerializeField] private Button low, mid, high;
@@ -38,6 +39,8 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("GraphicsValue"));
     }
 
     private void Start()
@@ -57,6 +60,7 @@ public class MenuController : MonoBehaviour
         low.onClick.AddListener(() => ChangeGraphics(0));
         mid.onClick.AddListener(() => ChangeGraphics(1));
         high.onClick.AddListener(() => ChangeGraphics(2));
+        haveMotionBlur.onValueChanged.AddListener(MotionBlur);
 
         openAudioScreen.onClick.AddListener(() => OpenScreen("audio"));
         closeAudioScreen.onClick.AddListener(() => CloseScreen("audio"));
@@ -65,6 +69,11 @@ public class MenuController : MonoBehaviour
         closeCreditsScreen.onClick.AddListener(() => CloseScreen("credits"));
 
         exitButton.onClick.AddListener(Exit);
+
+        if (PlayerPrefs.GetInt("HaveMotion") == 1)
+            haveMotionBlur.isOn = true;
+        else
+            haveMotionBlur.isOn = false;
     }
 
     private void Update()
@@ -154,6 +163,15 @@ public class MenuController : MonoBehaviour
     private void ChangeGraphics(int _value)
     {
         QualitySettings.SetQualityLevel(_value);
+        PlayerPrefs.SetInt("GraphicsValue", _value);
+    }
+
+    private void MotionBlur(bool _isOn)
+    {
+        if (_isOn)
+            PlayerPrefs.SetInt("HaveMotion", 1);
+        else
+            PlayerPrefs.SetInt("HaveMotion", 0);
     }
 
     private void Exit()

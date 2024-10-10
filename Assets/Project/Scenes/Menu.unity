@@ -1003,7 +1003,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &427536496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1213,7 @@ MonoBehaviour:
   pauseScreen: {fileID: 0}
   closePauseScreen: {fileID: 1967168430}
   videoScreen: {fileID: 249191388}
+  haveMotionBlur: {fileID: 352024604}
   closeVideoScreen: {fileID: 1967168430}
   openVideoScreen: {fileID: 1241400727}
   low: {fileID: 1756823146}

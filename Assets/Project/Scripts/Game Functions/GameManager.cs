@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,7 +36,8 @@ public class GameManager : MonoBehaviour
     public Parazon parazon;
     private string[] textParts;
 
-    [Header("ONLY IN EDITOR VARIABLES")]
+    [Header("System")]
+    [SerializeField] private Volume volume;
     public Button forceNewDay;
     public bool activeCursor;
 
@@ -62,6 +65,11 @@ public class GameManager : MonoBehaviour
             forceNewDay.gameObject.SetActive(true);
         else
             forceNewDay.gameObject.SetActive(false);
+
+        if (volume != null && volume.profile != null)
+            if (volume.profile.TryGet(out MotionBlur _blur))
+                if (PlayerPrefs.GetInt("HaveMotion") == 1) _blur.active = true;
+                else _blur.active = false;
     }
 
     private void Update()
@@ -187,5 +195,4 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(10);
         StartCoroutine(LostSanity());
     }
-
 }
