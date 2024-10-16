@@ -28,6 +28,8 @@ public class Food : ObjectsInteract
 
                     _hit.collider.gameObject.GetComponent<Pan>().haveFood = true;
                     _hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                    _hit.collider.gameObject.GetComponent<Pan>().food = gameObject;
+
                     StartCoroutine(_hit.collider.gameObject.GetComponent<Pan>().LayerToNormal());
 
                     alreadyInPan = true;

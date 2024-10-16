@@ -5,7 +5,15 @@ using UnityEngine;
 public class CookingSystem : ObjectsInteract
 {
     public Transform slot;
+    public GameObject food;
+    public bool haveFood;
     private bool isActive;
+
+    private void Update()
+    {
+        if (isActive && haveFood)
+            Debug.Log("Cozinhando");
+    }
 
     public override void InteractFunction()
     {

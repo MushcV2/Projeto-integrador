@@ -5,9 +5,11 @@ using UnityEngine;
 public class Pan : ObjectsInteract
 {
     public bool haveFood;
+
     private Vector3 originalScale;
+    public GameObject food;
     private GameObject ovenObject;
-    private bool seeingOven; 
+    private bool seeingOven;
 
     protected override void Start()
     {
@@ -35,7 +37,10 @@ public class Pan : ObjectsInteract
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         gameObject.transform.parent = null;
+
                         ovenObject = _hit.collider.gameObject;
+                        ovenObject.gameObject.GetComponent<CookingSystem>().food = food;
+                        ovenObject.GetComponent<CookingSystem>().haveFood = true;
 
                         Invoke(nameof(ChangePosition), 0.2f);
                     }
@@ -65,6 +70,12 @@ public class Pan : ObjectsInteract
         playerInteract.interactObject = null;
         playerInteract.forcePanel = false;
         playerInteract.alreadyInteract = false;
+
+        if (ovenObject != null)
+        {
+            ovenObject.GetComponent<CookingSystem>().food = null;
+            ovenObject.GetComponent<CookingSystem>().haveFood = false;
+        }
 
         StartCoroutine(LayerToNormal());
     }
