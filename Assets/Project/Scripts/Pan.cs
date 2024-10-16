@@ -57,6 +57,8 @@ public class Pan : ObjectsInteract
     {
         if (seeingOven) return;
 
+        gameObject.transform.parent = null;
+
         rb.isKinematic = false;
         rb.useGravity = true;
 
