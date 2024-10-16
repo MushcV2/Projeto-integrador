@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class CookingSystem : ObjectsInteract
 {
-    public Transform[] slots;
+    public Transform slot;
 
     public override void InteractFunction()
     {
-        Debug.Log("Interagiu com o fogao");
+        StopInteract();
     }
 
     public override void StopInteract()
     {
-        Debug.Log("Parou de interagir");
+
     }
 }
