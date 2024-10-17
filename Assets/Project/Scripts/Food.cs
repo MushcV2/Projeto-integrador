@@ -6,6 +6,8 @@ public class Food : ObjectsInteract
 {
     [SerializeField] private bool handlingItem;
     private bool alreadyInPan;
+    private GameObject panObject;
+    private Vector3 localScale;
 
     private void Update()
     {
@@ -22,15 +24,19 @@ public class Food : ObjectsInteract
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     gameObject.layer = LayerMask.NameToLayer("Default");
+                    panObject = _hit.collider.gameObject;
 
-                    transform.parent = _hit.transform;
-                    transform.localPosition = Vector3.zero;
+                    rb.isKinematic = true;
+                    rb.useGravity = false;
 
-                    _hit.collider.gameObject.GetComponent<Pan>().haveFood = true;
-                    _hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
-                    _hit.collider.gameObject.GetComponent<Pan>().food = gameObject;
+                    transform.parent = panObject.transform;
+                    transform.localPosition = new Vector3(panObject.transform.position.x, panObject.transform.position.y + 0.2f, panObject.transform.position.z);
 
-                    StartCoroutine(_hit.collider.gameObject.GetComponent<Pan>().LayerToNormal());
+                    panObject.GetComponent<Pan>().haveFood = true;
+                    panObject.GetComponent<Pan>().food = gameObject;
+                    panObject.layer = LayerMask.NameToLayer("Default");
+
+                    StartCoroutine(panObject.GetComponent<Pan>().LayerToNormal());
 
                     alreadyInPan = true;
 
@@ -45,11 +51,25 @@ public class Food : ObjectsInteract
 
     public override void InteractFunction()
     {
+        base.InteractFunction();
+
         handlingItem = true;
     }
 
     public override void StopInteract()
     {
+        if (panObject != null && panObject.GetComponent<Pan>().haveFood) return;
+
+        gameObject.transform.parent = null;
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        objectCollider.isTrigger = false;
+
+        playerInteract.interactObject = null;
+        playerInteract.forcePanel = false;
+        playerInteract.alreadyInteract = false;
+
         handlingItem = false;
         playerInteract.forcePanel = false;
     }

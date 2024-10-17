@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pan : ObjectsInteract
 {
     public bool haveFood;
+    //public GameObject slot;
 
     private Vector3 originalScale;
     public GameObject food;
@@ -66,6 +67,7 @@ public class Pan : ObjectsInteract
 
         rb.isKinematic = false;
         rb.useGravity = true;
+        objectCollider.isTrigger = false;
 
         playerInteract.interactObject = null;
         playerInteract.forcePanel = false;

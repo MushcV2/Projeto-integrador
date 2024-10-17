@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     {
         if (stopFollowing)
         {
-            transform.localEulerAngles = Vector3.zero;
+            //transform.localEulerAngles = Vector3.zero;
             return;
         }
 
