@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class WashObject : MonoBehaviour
 {
     private GameManager gameManager;
 
+    [SerializeField] private AudioSource completedSound;
     [SerializeField] private float washProgression;
     [SerializeField] private float offset;
     public bool touchOnObject;
@@ -17,6 +19,7 @@ public class WashObject : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
+
         firstTime = true;
     }
 
@@ -74,12 +77,13 @@ public class WashObject : MonoBehaviour
         if (washProgression == 100)
         {
             washFinished = true;
+            completedSound.Play();
 
             Debug.Log("Finalizado");
             yield break;
         }
 
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(0.04f);
         StartCoroutine(WashProgression());
     }
 }
