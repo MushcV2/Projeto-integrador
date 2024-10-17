@@ -11,6 +11,7 @@ TagManager:
   - ItemsDelivery
   - Pan
   - Oven
+  - Water
   layers:
   - Default
   - TransparentFX

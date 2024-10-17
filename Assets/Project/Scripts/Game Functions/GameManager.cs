@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text dayTXT;
     [SerializeField] private TMP_Text dayComputerTXT;
     [SerializeField] private float timeElapse;
-    [SerializeField] private float seconds;
     [SerializeField] private int minutes;
     [SerializeField] private bool timeIsRunning;
+    public float seconds;
     public int days;
     public float multiplier;
 

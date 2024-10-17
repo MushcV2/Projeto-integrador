@@ -17,7 +17,7 @@ public class WashingTask : ObjectsInteract
             Cursor.visible = true;
             crossHair.gameObject.SetActive(false);
 
-            if (player.isSitting) player.Crounch();
+            if (player.isCrouching) player.Crounch();
 
             player.transform.position = lockPlayer.position;
             player.canMove = false;

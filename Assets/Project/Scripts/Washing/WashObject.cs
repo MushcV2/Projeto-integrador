@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseInObject : MonoBehaviour
+public class WashObject : MonoBehaviour
 {
+    private GameManager gameManager;
+
+    [SerializeField] private float washProgression;
     [SerializeField] private float offset;
     public bool touchOnObject;
     private bool firstTime;
+    private bool washFinished;
     private Rigidbody rb;
 
     private void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
         firstTime = true;
     }
@@ -46,5 +51,35 @@ public class MouseInObject : MonoBehaviour
     private void OnCollisionExit(Collision _other)
     {
         touchOnObject = false;
+    }
+
+    private void OnTriggerEnter(Collider _other)
+    {
+        if (_other.CompareTag("Water"))
+        {
+            StartCoroutine(WashProgression());
+            Debug.Log("Esta na agua");
+        }
+    }
+
+    private void OnTriggerExit(Collider _other)
+    {
+        if (_other.CompareTag("Water")) StopCoroutine(WashProgression());
+    }
+
+    private IEnumerator WashProgression()
+    {
+        washProgression++;
+
+        if (washProgression == 100)
+        {
+            washFinished = true;
+
+            Debug.Log("Finalizado");
+            yield break;
+        }
+
+        yield return new WaitForSeconds(0.08f);
+        StartCoroutine(WashProgression());
     }
 }
