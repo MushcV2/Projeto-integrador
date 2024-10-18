@@ -6,14 +6,15 @@ using UnityEngine;
 public class WashObject : MonoBehaviour
 {
     private GameManager gameManager;
+    private Rigidbody rb;
 
+    [SerializeField] private WashingTask washingTask; 
     [SerializeField] private AudioSource completedSound;
     [SerializeField] private float washProgression;
     [SerializeField] private float offset;
     public bool touchOnObject;
     private bool firstTime;
     private bool washFinished;
-    private Rigidbody rb;
 
     private void Start()
     {

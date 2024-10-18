@@ -39,12 +39,13 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-
-        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("GraphicsValue"));
     }
 
     private void Start()
     {
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("GraphicsValue"));
+        Debug.Log(QualitySettings.GetQualitySettings());
+
         configsBG.SetActive(false);
         videoScreen.SetActive(false);
         audioScreen.SetActive(false);
@@ -178,6 +179,8 @@ public class MenuController : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(_value);
         PlayerPrefs.SetInt("GraphicsValue", _value);
+
+        Debug.Log(QualitySettings.names[_value]);
     }
 
     private void MotionBlur(bool _isOn)

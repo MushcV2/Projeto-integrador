@@ -278,8 +278,11 @@ MonoBehaviour:
   - {fileID: 2834543485273836529}
   - {fileID: 6683638306850868424}
   - {fileID: 8434880016808359877}
+  cartCountTXT: {fileID: 0}
   deliveryPoint: {fileID: 0}
   itemsCart: []
+  gameManager: {fileID: 0}
+  waitingToDelivery: {fileID: 0}
 --- !u!1 &2427590211002491252
 GameObject:
   m_ObjectHideFlags: 0

@@ -232,7 +232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   player: {fileID: 0}
-  appsManager: {fileID: 706673921862714950}
+  appsManager:
+  - {fileID: 0}
   turnOnButton: {fileID: 5815807715152127363}
   taskBarTurnOff: {fileID: 6220545645136912176}
   restartTaskBar: {fileID: 4162401353976032565}
@@ -254,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  usableItem: {fileID: 0}
+  popUpUsable: {fileID: 0}
   objectCollider: {fileID: 0}
   playerInteract: {fileID: 0}
   player: {fileID: 0}
@@ -269,6 +270,7 @@ MonoBehaviour:
   itemIndex: 0
   usable: 0
   canOpen: 0
+  dayToDestroy: 0
   chair: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!1 &699311686451663813
