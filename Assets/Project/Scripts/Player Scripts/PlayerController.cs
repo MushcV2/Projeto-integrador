@@ -18,10 +18,10 @@ public class PlayerController : SanityController
     public bool walking;
     public bool canMove;
     public bool isSitting;
+    public Vector3 finalVelocity;
     private Vector3 strafe;
     private Vector3 forward;
     private Vector3 vertical;
-    private Vector3 finalVelocity;
 
     private void Awake()
     {
