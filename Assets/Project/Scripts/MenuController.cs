@@ -16,6 +16,8 @@ public class MenuController : MonoBehaviour
     [Header("Pause UI")]
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Button closePauseScreen;
+    [SerializeField] private Button returnToGame;
+    [SerializeField] private Button returnToMenu;
 
     [Header("Video UI")]
     [SerializeField] private GameObject videoScreen;
@@ -33,9 +35,6 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject creditsScreen;
     [SerializeField] private Button closeCreditsScreen;
     [SerializeField] private Button openCreditsScreen;
-
-    //[Header("Variables")]
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -115,6 +114,11 @@ public class MenuController : MonoBehaviour
         pauseScreen = GameObject.Find("PauseScreen");
 
         closePauseScreen = pauseScreen.transform.Find("Close").GetComponent<Button>();
+        returnToGame = pauseScreen.transform.Find("Game").GetComponent<Button>();
+        returnToMenu = pauseScreen.transform.Find("Menu").GetComponent<Button>();
+
+        returnToMenu.onClick.AddListener(ToMenu);
+        returnToGame.onClick.AddListener(() => CloseScreen("pause"));
         closePauseScreen.onClick.AddListener(() => CloseScreen("pause"));
 
         pauseScreen.SetActive(false);
@@ -159,6 +163,8 @@ public class MenuController : MonoBehaviour
 
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+
+                Time.timeScale = 1f;
                 break;
 
             case "video":
@@ -189,6 +195,12 @@ public class MenuController : MonoBehaviour
             PlayerPrefs.SetInt("HaveMotion", 1);
         else
             PlayerPrefs.SetInt("HaveMotion", 0);
+    }
+
+    private void ToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        Destroy(gameObject);
     }
 
     private void Exit()
