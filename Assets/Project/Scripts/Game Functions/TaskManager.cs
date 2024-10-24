@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Tasks : MonoBehaviour
+public class TaskManager : MonoBehaviour
 {
-    public string missionObject;
+    private ScoreCounting scoreCounting;
+
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TMP_Text missionTXT;
     [SerializeField] private List <string> missions;
@@ -14,9 +15,11 @@ public class Tasks : MonoBehaviour
     [SerializeField] private int index;
     [SerializeField] private int missionsCompletedCount;
     [SerializeField] private bool missionCompleted;
+    public string missionObject;
 
     private void Start()
     {
+        scoreCounting = GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
         missionsCompletedCount = 0;
 
         RandomMission();
@@ -72,6 +75,8 @@ public class Tasks : MonoBehaviour
             index = _index;
             missionCompleted = true;
 
+            scoreCounting.taskScore += 150;
+
             Invoke(nameof(CompletedCountAdd), 4.5f);
         }
         else
@@ -88,5 +93,7 @@ public class Tasks : MonoBehaviour
     {
         CancelInvoke(nameof(RandomMission));
         missionTXT.text = "Todas as missões foram completas";
+
+        scoreCounting.taskScore += 400;
     }
 }

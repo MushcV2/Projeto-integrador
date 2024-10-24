@@ -10,10 +10,16 @@ public class ScoreCounting : MonoBehaviour
     [Header("Score per Day")]
     [SerializeField] private TMP_Text dayTXT;
     [SerializeField] private TMP_Text dayScoreTXT;
+    [SerializeField] private TMP_Text taskTXT;
+    [SerializeField] private TMP_Text sleepTimeTXT;
+    [SerializeField] private TMP_Text sanityTXT;
     [SerializeField] private TMP_Text message;
     [SerializeField] private string[] messageList;
     public int dayScore;
-    private string[] split;
+    public int taskScore;
+    public int sleepScore;
+    public int sanityScore;
+    private string[] split, split2, split3, split4;
 
     [Header("Score final Day")]
     [SerializeField] private int finalScore;
@@ -23,11 +29,19 @@ public class ScoreCounting : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
         split = dayTXT.text.Split(';');
+        split2 = taskTXT.text.Split(';');
+        split3 = sleepTimeTXT.text.Split(';');
+        split4 = sanityTXT.text.Split(';');
     }
 
     public void UpdateDayScore()
     {
         dayTXT.text = split[0] + " : " + gameManager.days;
+        dayScore = taskScore + sleepScore + sanityScore;
+
+        taskTXT.text = split2[0] + " : " + taskScore;
+        sleepTimeTXT.text = split3[0] + " : " + sleepScore;
+        sanityTXT.text = split4[0] + " : " + sanityScore;
 
         if (dayScore <= 500)
         {

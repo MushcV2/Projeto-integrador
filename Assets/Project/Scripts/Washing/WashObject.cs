@@ -82,6 +82,8 @@ public class WashObject : MonoBehaviour
             washFinished = true;
             completedSound.Play();
 
+            scoreCounting.taskScore += 50;
+
             Debug.Log("Finalizado");
             yield break;
         }

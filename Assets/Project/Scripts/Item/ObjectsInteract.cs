@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ObjectsInteract : MonoBehaviour
 {
     [Header("Item Variables")]
-    [SerializeField] protected Tasks task;
+    [SerializeField] protected TaskManager task;
     [SerializeField] protected TMP_Text popUpUsable;
     [SerializeField] protected Collider objectCollider;
     [SerializeField] protected PlayerInteract playerInteract;
@@ -29,7 +29,7 @@ public class ObjectsInteract : MonoBehaviour
     {
         playerInteract = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteract>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        task = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<Tasks>();
+        task = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<TaskManager>();
         itemPos = GameObject.FindGameObjectWithTag("ItemPos").GetComponent<Transform>();
         //popUpUsable = FindAnyObjectByType<Canvas>().transform.Find("UsableTXT").GetComponent<TextMeshProUGUI>();
     }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] PlayerController player;
-    [SerializeField] private Tasks task;
+    [SerializeField] private TaskManager task;
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float distance;
     public GameObject interactObject;

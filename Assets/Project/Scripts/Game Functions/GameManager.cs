@@ -9,7 +9,6 @@ using UnityEngine.Rendering.Universal;
 public class GameManager : MonoBehaviour
 {
     [Header("Clock Variables")]
-    [SerializeField] private SanityController sanity;
     [SerializeField] private TMP_Text clockTXT;
     [SerializeField] private TMP_Text dayTXT;
     [SerializeField] private TMP_Text dayComputerTXT;
@@ -33,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private PlayerController playerControl;
+    [SerializeField] private SanityController sanityController;
     [SerializeField] private ScoreCounting scoreCounting;
     public Parazon parazon;
     private string[] textParts;
@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LostSanity());
-
         textParts = dayTXT.text.Split(';');
         dayTXT.text = textParts[0] + " " + days;
         dayComputerTXT.text = textParts[0] + " " + days;
@@ -114,6 +112,8 @@ public class GameManager : MonoBehaviour
         {
             minutes++;
             seconds = 0;
+
+            sanityController.LostSanity(5);
         }
 
         if (minutes >= 24)
@@ -126,6 +126,15 @@ public class GameManager : MonoBehaviour
     private void DayCycle()
     {
         Debug.Log("Dia passou");
+
+        if (minutes >= 19 && minutes <= 22) scoreCounting.dayScore += 300;
+        else scoreCounting.dayScore += 150;
+
+        if (sanityController.currentSanity >= 75) scoreCounting.sanityScore += 500;
+        else if (sanityController.currentSanity < 75 && sanityController.currentSanity >= 50) scoreCounting.sanityScore += 300;
+        else if (sanityController.currentSanity < 50 && sanityController.currentSanity >= 25) scoreCounting.sanityScore += 150;
+        else scoreCounting.sanityScore += 50;
+
         scoreCounting.UpdateDayScore();
 
         timeIsRunning = false;
@@ -188,14 +197,5 @@ public class GameManager : MonoBehaviour
         seconds = 0;
 
         timeIsRunning = true;
-    }
-
-    private IEnumerator LostSanity()
-    {
-        yield return new WaitForSeconds(10);
-        sanity.LostSanity(2);
-
-        yield return new WaitForSeconds(10);
-        StartCoroutine(LostSanity());
     }
 }

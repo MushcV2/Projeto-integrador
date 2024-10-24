@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class SanityController : MonoBehaviour
 {
     [Header("Sanity Variables")]
-    [SerializeField] private float currentSanity;
     [SerializeField] private float maxSanity;
+    public float currentSanity;
 
     [Header("Sanity UI")]
     [SerializeField] private Slider sanityBar;

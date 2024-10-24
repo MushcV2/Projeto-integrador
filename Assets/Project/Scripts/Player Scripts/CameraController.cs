@@ -8,8 +8,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform character;
     [SerializeField] private Transform characterHead;
     [SerializeField] private float sensibility;
-    private Animator anim;
     public bool stopFollowing;
+    public float initialPos;
+    private Animator anim;
     private float rotX;
     private float rotY;
 
@@ -25,6 +26,7 @@ public class CameraController : MonoBehaviour
         Cursor.visible = false;
 
         stopFollowing = false;
+        initialPos = characterHead.localPosition.y;
     }
 
     private void Update()
