@@ -24,6 +24,7 @@ public class SitOnChair : ObjectsInteract
         player.isSitting = true;
         playerInteract.alreadyInteract = false;
 
+        cam.GetComponent<CameraController>().characterHead.localPosition = new Vector3(0f, cam.GetComponent<CameraController>().initialPos, 0f);
         player.gameObject.transform.position = new Vector3(newPos.position.x, player.gameObject.transform.position.y, newPos.position.z);
 
         computer.layer = LayerMask.NameToLayer("Interact");

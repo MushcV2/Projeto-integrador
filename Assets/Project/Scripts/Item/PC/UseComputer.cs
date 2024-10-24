@@ -25,6 +25,7 @@ public class UseComputer : ObjectsInteract
         player.canMove = false;
         gameManager.multiplier = 2f;
 
+        cam.GetComponent<CameraController>().characterHead.localPosition = new Vector3(0f, cam.GetComponent<CameraController>().initialPos, 0f);
         cam.GetComponent<CameraController>().stopFollowing = true;
         StartCoroutine(UpdateRotCam(0.7f));
     }

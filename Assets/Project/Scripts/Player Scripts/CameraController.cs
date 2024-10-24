@@ -6,8 +6,8 @@ public class CameraController : MonoBehaviour
 {
     [Header("Camera Variables")]
     [SerializeField] private Transform character;
-    [SerializeField] private Transform characterHead;
     [SerializeField] private float sensibility;
+    public Transform characterHead;
     public bool stopFollowing;
     public float initialPos;
     private Animator anim;

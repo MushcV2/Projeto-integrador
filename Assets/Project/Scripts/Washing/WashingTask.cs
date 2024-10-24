@@ -22,6 +22,7 @@ public class WashingTask : ObjectsInteract
             player.transform.position = lockPlayer.position;
             player.canMove = false;
 
+            cam.GetComponent<CameraController>().characterHead.localPosition = new Vector3(0f, cam.GetComponent<CameraController>().initialPos, 0f);
             cam.GetComponent<CameraController>().stopFollowing = true;
             cam.transform.eulerAngles = new Vector3(0f, 90, 0f);
         }

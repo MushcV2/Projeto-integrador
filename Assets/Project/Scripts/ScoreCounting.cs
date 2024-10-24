@@ -36,12 +36,12 @@ public class ScoreCounting : MonoBehaviour
 
     public void UpdateDayScore()
     {
-        dayTXT.text = split[0] + " : " + gameManager.days;
+        dayTXT.text = split[0] + ": " + gameManager.days;
         dayScore = taskScore + sleepScore + sanityScore;
 
-        taskTXT.text = split2[0] + " : " + taskScore;
-        sleepTimeTXT.text = split3[0] + " : " + sleepScore;
-        sanityTXT.text = split4[0] + " : " + sanityScore;
+        taskTXT.text = split2[0] + ": " + taskScore;
+        sleepTimeTXT.text = split3[0] + ": " + sleepScore;
+        sanityTXT.text = split4[0] + ": " + sanityScore;
 
         if (dayScore <= 500)
         {
