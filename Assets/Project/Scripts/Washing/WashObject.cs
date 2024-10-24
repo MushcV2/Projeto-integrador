@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class WashObject : MonoBehaviour
 {
+    private ScoreCounting scoreCounting;
     private GameManager gameManager;
     private Rigidbody rb;
 
@@ -19,6 +20,7 @@ public class WashObject : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        scoreCounting =GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
         rb = GetComponent<Rigidbody>();
 
         firstTime = true;

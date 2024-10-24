@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private PlayerController playerControl;
+    [SerializeField] private ScoreCounting scoreCounting;
     public Parazon parazon;
     private string[] textParts;
 
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
     private void DayCycle()
     {
         Debug.Log("Dia passou");
+        scoreCounting.UpdateDayScore();
 
         timeIsRunning = false;
         days++;
@@ -179,6 +181,7 @@ public class GameManager : MonoBehaviour
 
         if (playerControl.isCrouching) playerControl.Crounch();
 
+        scoreCounting.dayScore = 0;
         multiplier = 1;
         minutes = 19;
         timeElapse = 0;

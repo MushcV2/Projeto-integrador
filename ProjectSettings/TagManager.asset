@@ -12,6 +12,7 @@ TagManager:
   - Pan
   - Oven
   - Water
+  - ScoreCounting
   layers:
   - Default
   - TransparentFX
