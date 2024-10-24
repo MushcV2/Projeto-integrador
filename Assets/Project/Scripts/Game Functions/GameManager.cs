@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
             minutes++;
             seconds = 0;
 
-            sanityController.LostSanity(5);
+            sanityController.LostSanity(10);
         }
 
         if (minutes >= 24)
@@ -127,12 +127,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Dia passou");
 
-        if (minutes >= 19 && minutes <= 22) scoreCounting.dayScore += 300;
-        else scoreCounting.dayScore += 150;
+        if (minutes >= 17 && minutes <= 22) scoreCounting.sleepScore += 250;
+        else scoreCounting.sleepScore += 125;
 
-        if (sanityController.currentSanity >= 75) scoreCounting.sanityScore += 500;
-        else if (sanityController.currentSanity < 75 && sanityController.currentSanity >= 50) scoreCounting.sanityScore += 300;
-        else if (sanityController.currentSanity < 50 && sanityController.currentSanity >= 25) scoreCounting.sanityScore += 150;
+        if (sanityController.currentSanity >= 75) scoreCounting.sanityScore += 400;
+        else if (sanityController.currentSanity < 75 && sanityController.currentSanity >= 50) scoreCounting.sanityScore += 200;
+        else if (sanityController.currentSanity < 50 && sanityController.currentSanity >= 25) scoreCounting.sanityScore += 100;
         else scoreCounting.sanityScore += 50;
 
         scoreCounting.UpdateDayScore();
@@ -190,7 +190,8 @@ public class GameManager : MonoBehaviour
 
         if (playerControl.isCrouching) playerControl.Crounch();
 
-        scoreCounting.dayScore = 0;
+        scoreCounting.ResetScore();
+
         multiplier = 1;
         minutes = 19;
         timeElapse = 0;

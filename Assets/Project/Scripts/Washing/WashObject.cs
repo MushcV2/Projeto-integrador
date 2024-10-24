@@ -15,7 +15,6 @@ public class WashObject : MonoBehaviour
     [SerializeField] private float offset;
     public bool touchOnObject;
     private bool firstTime;
-    private bool washFinished;
 
     private void Start()
     {
@@ -79,7 +78,6 @@ public class WashObject : MonoBehaviour
 
         if (washProgression == 100)
         {
-            washFinished = true;
             completedSound.Play();
 
             scoreCounting.taskScore += 50;

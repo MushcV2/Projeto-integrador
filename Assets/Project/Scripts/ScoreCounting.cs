@@ -70,6 +70,14 @@ public class ScoreCounting : MonoBehaviour
         FinalDayScore();
     }
 
+    public void ResetScore()
+    {
+        dayScore = 0;
+        taskScore = 0;
+        sleepScore = 0;
+        sanityScore = 0;
+    }
+
     private void FinalDayScore()
     {
         finalScore += dayScore;
