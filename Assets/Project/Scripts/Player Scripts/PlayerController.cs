@@ -74,8 +74,8 @@ public class PlayerController : SanityController
         float _x = Input.GetAxisRaw("Horizontal");
         float _y = Input.GetAxisRaw("Vertical");
 
-        strafe = _x * currentSpeed * transform.right;
-        forward = _y * currentSpeed * transform.forward;
+        strafe = _x * transform.right;
+        forward = _y * transform.forward;
         vertical = new Vector3(0f, -gravity, 0f);
 
         if (Input.GetKeyDown(KeyCode.C)) Crounch();
@@ -86,7 +86,7 @@ public class PlayerController : SanityController
             EnableClock();
         }
 
-        finalVelocity = strafe + forward + vertical;
+        finalVelocity = (strafe.normalized * walkSpeed) + (forward.normalized * walkSpeed) + vertical;
         controller.Move(finalVelocity * Time.deltaTime);
     }
 
@@ -130,8 +130,8 @@ public class PlayerController : SanityController
         }
         else clockUI.GetComponent<Animator>().SetTrigger("Close");
 
-        Invoke(nameof(CloseClock), 3f);
-        Invoke(nameof(CanOpenClock), 0.4f);
+        Invoke(nameof(CloseClock), 4f);
+        Invoke(nameof(CanOpenClock), 1f);
     }
 
     private void CloseClock()

@@ -4,15 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
+public class Mission
+{
+    public int id;
+    public string name;
+
+    public void GetMission(int _id, string _name)
+    {
+        id = _id;
+        name = _name;
+    }
+}
+
 public class TaskManager : MonoBehaviour
 {
     private ScoreCounting scoreCounting;
 
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TMP_Text missionTXT;
-    [SerializeField] private List <string> dayMissions;
-    [SerializeField] private List <string> totalMissions;
-    [SerializeField] private int rng;
+    [SerializeField] private List <Mission> dayMissions;
+    [SerializeField] private List <Mission> totalMissions;
+    [SerializeField] private Mission currentMission;
     [SerializeField] private int index;
     [SerializeField] private int missionsCompletedCount;
     [SerializeField] private bool missionCompleted;
@@ -48,31 +61,34 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    private void RandomMission()
+    public void RandomMission()
     {
         print("Missao aleatoria");
 
         IEnumerator NewMission()
         {
-            rng = Random.Range(0, dayMissions.Count);
-            while (dayMissions[rng] == null)
+            int _rng = Random.Range(0, dayMissions.Count);
+            while (dayMissions[_rng].name == null)
             {
-                rng = Random.Range(0, dayMissions.Count);
+                _rng = Random.Range(0, dayMissions.Count);
 
                 yield return new WaitForSeconds(0.1f);
             }
 
-            missionTXT.text = dayMissions[rng];
+            Debug.Log(_rng);
+
+            currentMission = dayMissions[_rng];
+            missionTXT.text = currentMission.name;
 
             yield return new WaitForSeconds(0.05f);
-            dayMissions[rng] = null;
+            dayMissions[_rng] = null;
         }
         StartCoroutine(NewMission());
     }
 
     public void MissionCompleted(int _index)
     {
-        if (_index == rng)
+        if (_index == currentMission.id)
         {
             index = _index;
             missionCompleted = true;
@@ -112,5 +128,7 @@ public class TaskManager : MonoBehaviour
             dayMissions.Add(totalMissions[_rng]);
             totalMissions.Remove(totalMissions[_rng]);
         }
+
+        currentMission = dayMissions[0];
     }
 }

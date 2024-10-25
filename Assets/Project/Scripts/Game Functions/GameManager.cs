@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
 
         scoreCounting.UpdateDayScore();
         taskManager.SetDayMissions();
+        taskManager.RandomMission();
 
         timeIsRunning = false;
         days++;
