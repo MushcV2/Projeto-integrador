@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ComputerSystem : MonoBehaviour
 {
     [Header("Computer Variables")]
+    [SerializeField] private AudioSource audioS;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController player;
     [SerializeField] private AppsManager[] appsManager;
@@ -20,6 +21,7 @@ public class ComputerSystem : MonoBehaviour
 
     private void Start()
     {
+        audioS = GetComponent<AudioSource>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
@@ -29,6 +31,12 @@ public class ComputerSystem : MonoBehaviour
 
         appsPanel.SetActive(false);
     }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire1") && isOn && player.isSitting) audioS.Play();
+    }
+
     private void TurnOnPc()
     {
         if (!isOn && !canTurnOff) 

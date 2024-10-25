@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ObjectsInteract : MonoBehaviour
 {
     [Header("Item Variables")]
+    [SerializeField] protected AudioSource audioS;
     [SerializeField] protected TaskManager task;
     [SerializeField] protected TMP_Text popUpUsable;
     [SerializeField] protected Collider objectCollider;
