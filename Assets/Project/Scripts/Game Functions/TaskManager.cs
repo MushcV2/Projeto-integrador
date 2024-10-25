@@ -10,7 +10,8 @@ public class TaskManager : MonoBehaviour
 
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TMP_Text missionTXT;
-    [SerializeField] private List <string> missions;
+    [SerializeField] private List <string> dayMissions;
+    [SerializeField] private List <string> totalMissions;
     [SerializeField] private int rng;
     [SerializeField] private int index;
     [SerializeField] private int missionsCompletedCount;
@@ -22,12 +23,13 @@ public class TaskManager : MonoBehaviour
         scoreCounting = GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
         missionsCompletedCount = 0;
 
+        SetDayMissions();
         RandomMission();
     }
 
     private void Update()
     {
-        if (missionsCompletedCount == missions.Count)
+        if (missionsCompletedCount == dayMissions.Count)
         {
             AllMissionsCompleted();
             return;
@@ -52,18 +54,18 @@ public class TaskManager : MonoBehaviour
 
         IEnumerator NewMission()
         {
-            rng = Random.Range(0, missions.Count);
-            while (missions[rng] == null)
+            rng = Random.Range(0, dayMissions.Count);
+            while (dayMissions[rng] == null)
             {
-                rng = Random.Range(0, missions.Count);
+                rng = Random.Range(0, dayMissions.Count);
 
                 yield return new WaitForSeconds(0.1f);
             }
 
-            missionTXT.text = missions[rng];
+            missionTXT.text = dayMissions[rng];
 
             yield return new WaitForSeconds(0.05f);
-            missions[rng] = null;
+            dayMissions[rng] = null;
         }
         StartCoroutine(NewMission());
     }
@@ -95,5 +97,20 @@ public class TaskManager : MonoBehaviour
         missionTXT.text = "Todas as missões foram completas";
 
         scoreCounting.taskScore += 400;
+    }
+
+    public void SetDayMissions()
+    {
+        if (totalMissions.Count == 0) return;
+
+        dayMissions.Clear();
+
+        for (int i = 1; i <= 3; i++)
+        {
+            int _rng = Random.Range(0, totalMissions.Count);
+
+            dayMissions.Add(totalMissions[_rng]);
+            totalMissions.Remove(totalMissions[_rng]);
+        }
     }
 }

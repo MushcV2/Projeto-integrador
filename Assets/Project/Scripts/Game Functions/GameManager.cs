@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button startNextDay;
     [SerializeField] private Transform newDayPos;
     [SerializeField] private Transform playerPos;
+    [SerializeField] private TaskManager taskManager;
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private PlayerController playerControl;
     [SerializeField] private SanityController sanityController;
@@ -136,6 +137,7 @@ public class GameManager : MonoBehaviour
         else scoreCounting.sanityScore += 50;
 
         scoreCounting.UpdateDayScore();
+        taskManager.SetDayMissions();
 
         timeIsRunning = false;
         days++;
