@@ -14,6 +14,7 @@ public class PlayerController : SanityController
     [SerializeField] private float crouchSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float gravity;
+    public AudioSource audioS;
     public bool isCrouching;
     public bool walking;
     public bool canMove;
@@ -34,6 +35,7 @@ public class PlayerController : SanityController
         instance = this;
 
         controller = GetComponent<CharacterController>();
+        audioS = GetComponent<AudioSource>();
     }
 
     protected override void Start()
@@ -56,7 +58,13 @@ public class PlayerController : SanityController
         else
             walking = false;
 
-        if (!canMove) return;
+        if (!canMove)
+        {
+            audioS.Stop();
+            return;
+        }
+
+        if (!walking) audioS.Play();
 
         PlayerInputs();
     }
