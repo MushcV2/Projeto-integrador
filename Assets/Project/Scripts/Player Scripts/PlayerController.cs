@@ -23,6 +23,12 @@ public class PlayerController : SanityController
     private Vector3 forward;
     private Vector3 vertical;
 
+    [Header("UI")]
+    [SerializeField] private UseComputer useComputer;
+    [SerializeField] private WashingTask washingTask;
+    [SerializeField] private bool canOpenClock;
+    public GameObject clockUI;
+
     private void Awake()
     {
         instance = this;
@@ -34,8 +40,10 @@ public class PlayerController : SanityController
     {
         base.Start();
 
+        clockUI.SetActive(false);
         currentSpeed = walkSpeed;
         canMove = true;
+        canOpenClock = true;
     }
 
     protected override void Update()
@@ -63,6 +71,12 @@ public class PlayerController : SanityController
         vertical = new Vector3(0f, -gravity, 0f);
 
         if (Input.GetKeyDown(KeyCode.C)) Crounch();
+
+        if (Input.GetKeyDown(KeyCode.H) && canOpenClock && !GetComponent<PlayerInteract>().alreadyInteract && !useComputer.onPc && !washingTask.isWashing)
+        {
+            canOpenClock = false;
+            EnableClock();
+        }
 
         finalVelocity = strafe + forward + vertical;
         controller.Move(finalVelocity * Time.deltaTime);
@@ -97,5 +111,28 @@ public class PlayerController : SanityController
             return false;
         else
             return true;
+    }
+
+    private void EnableClock()
+    {
+        if (!clockUI.activeSelf)
+        {
+            clockUI.SetActive(true);
+            clockUI.GetComponent<Animator>().SetTrigger("Open");
+        }
+        else clockUI.GetComponent<Animator>().SetTrigger("Close");
+
+        Invoke(nameof(CloseClock), 3f);
+        Invoke(nameof(CanOpenClock), 0.4f);
+    }
+
+    private void CloseClock()
+    {
+        clockUI.GetComponent<Animator>().SetTrigger("Close");
+    }
+
+    private void CanOpenClock()
+    {
+        canOpenClock = true;
     }
 }

@@ -54,6 +54,7 @@ public class PlayerInteract : MonoBehaviour
             canInteract = false;
 
             task.missionObject = interactObject.name;
+            gameObject.GetComponent<PlayerController>().clockUI.GetComponent<Animator>().SetTrigger("Close");
 
             if (interactObject != null) interactObject.GetComponent<ObjectsInteract>().InteractFunction();
         }

@@ -7,6 +7,7 @@ public class UseComputer : ObjectsInteract
 {
     [SerializeField] private GameObject chair;
     [SerializeField] private GameManager gameManager;
+    public bool onPc;
 
     protected override void Start()
     {
@@ -22,7 +23,9 @@ public class UseComputer : ObjectsInteract
         taskPanel.SetActive(false);
         clockPanel.SetActive(false);
 
+        playerInteract.gameObject.GetComponent<PlayerController>().clockUI.GetComponent<Animator>().SetTrigger("Close");
         player.canMove = false;
+        onPc = true;
         gameManager.multiplier = 2f;
 
         cam.GetComponent<CameraController>().characterHead.localPosition = new Vector3(0f, cam.GetComponent<CameraController>().initialPos, 0f);
@@ -59,6 +62,7 @@ public class UseComputer : ObjectsInteract
         gameManager.multiplier = 1f;
         playerInteract.alreadyInteract = true;
         playerInteract.interactObject = chair;
+        onPc = false;
 
         cam.GetComponent<CameraController>().stopFollowing = false;
     }

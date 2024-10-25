@@ -5,7 +5,7 @@ using UnityEngine;
 public class WashingTask : ObjectsInteract
 {
     [SerializeField] private Transform lockPlayer;
-    private bool isWashing;
+    public bool isWashing;
 
     public override void InteractFunction()
     {
@@ -20,6 +20,7 @@ public class WashingTask : ObjectsInteract
             if (player.isCrouching) player.Crounch();
 
             player.transform.position = lockPlayer.position;
+            playerInteract.gameObject.GetComponent<PlayerController>().clockUI.GetComponent<Animator>().SetTrigger("Close");
             player.canMove = false;
 
             cam.GetComponent<CameraController>().characterHead.localPosition = new Vector3(0f, cam.GetComponent<CameraController>().initialPos, 0f);
