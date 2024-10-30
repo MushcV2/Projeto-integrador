@@ -63,8 +63,6 @@ public class TaskManager : MonoBehaviour
 
     public void RandomMission()
     {
-        print("Missao aleatoria");
-
         IEnumerator NewMission()
         {
             int _rng = Random.Range(0, dayMissions.Count);

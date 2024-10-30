@@ -130,13 +130,7 @@ public class PlayerController : SanityController
         }
         else clockUI.GetComponent<Animator>().SetTrigger("Close");
 
-        Invoke(nameof(CloseClock), 4f);
         Invoke(nameof(CanOpenClock), 1f);
-    }
-
-    private void CloseClock()
-    {
-        clockUI.GetComponent<Animator>().SetTrigger("Close");
     }
 
     private void CanOpenClock()

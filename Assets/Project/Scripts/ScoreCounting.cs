@@ -67,6 +67,11 @@ public class ScoreCounting : MonoBehaviour
             message.text = messageList[3];
         }
 
+        Debug.Log($"A pontuação do dia foi de: {dayScore}");
+        Debug.Log($"A pontuação das tarefas foi de: {taskScore}");
+        Debug.Log($"A pontuação de sono foi de: {sleepScore}");
+        Debug.Log($"A pontuação de sanidade foi de: {sanityScore}");
+
         FinalDayScore();
     }
 

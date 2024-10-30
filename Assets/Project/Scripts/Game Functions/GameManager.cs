@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
         playerInteract.alreadyInteract = false;
         playerControl.isSitting = false;
         playerControl.canMove = true;
+        playerControl.clockUI.SetActive(false);
         playerControl.GetComponent<SanityController>().GainSanity(playerControl.GetComponent<SanityController>().currentSanity / 2);
 
         Camera.main.GetComponent<CameraController>().stopFollowing = false;
@@ -188,7 +189,6 @@ public class GameManager : MonoBehaviour
 
         // ---ACTIVE HUD--- //
         taskHUD.SetActive(true);
-        clockHUD.SetActive(true);
         sanityHUD.SetActive(true);
         crosshairHUD.SetActive(true);
 

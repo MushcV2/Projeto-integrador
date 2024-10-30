@@ -8,4 +8,22 @@ public class EventObject : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void DisableWithAnimation()
+    {
+        Invoke(nameof(DisableClock), 3f);
+    }
+
+    private void DisableClock()
+    {
+        gameObject.GetComponent<Animator>().SetTrigger("Close");
+
+        IEnumerator Disable()
+        {
+            yield return new WaitForSeconds(0.5f);
+            DisableObject();
+        }
+
+        StartCoroutine(Disable());
+    }
 }

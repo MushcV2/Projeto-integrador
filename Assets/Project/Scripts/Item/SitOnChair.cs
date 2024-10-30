@@ -25,8 +25,11 @@ public class SitOnChair : ObjectsInteract
         playerInteract.alreadyInteract = false;
 
         cam.GetComponent<CameraController>().characterHead.localPosition = new Vector3(0f, cam.GetComponent<CameraController>().initialPos, 0f);
+
         player.gameObject.transform.position = new Vector3(newPos.position.x, player.gameObject.transform.position.y, newPos.position.z);
-        playerInteract.gameObject.GetComponent<PlayerController>().clockUI.GetComponent<Animator>().SetTrigger("Close");
+        player.finalVelocity = new Vector3(0f, 0f , 0f);
+
+        if (player.clockUI.activeSelf) playerInteract.gameObject.GetComponent<PlayerController>().clockUI.GetComponent<Animator>().SetTrigger("Close");
 
         computer.layer = LayerMask.NameToLayer("Interact");
         gameObject.layer = LayerMask.NameToLayer("Default");
