@@ -16,23 +16,36 @@ public class SanityController : MonoBehaviour
     {
         currentSanity = maxSanity;
         sanityBar.maxValue = maxSanity;
+
+        sanityBar.gameObject.SetActive(false);
     }
     
     protected virtual void Update()
     {
-        sanityBar.value = Mathf.Lerp(sanityBar.value, currentSanity, 0.2f);
+        sanityBar.value = Mathf.Lerp(sanityBar.value, currentSanity, 0.6f);
     }
 
     public void GainSanity(float _sanity)
     {
+        sanityBar.gameObject.SetActive(true);
+        Invoke(nameof(DisableBar), 3f);
+
         currentSanity += Mathf.Min(currentSanity + _sanity, maxSanity);
     }
 
     public void LostSanity(float _sanity)
     {
+        sanityBar.gameObject.SetActive(true);
+        Invoke(nameof(DisableBar), 3f);
+
         currentSanity -= Mathf.Max(_sanity, 0);
 
         if (currentSanity == 0)
             Debug.Log("Sem sanidade");
+    }
+
+    private void DisableBar()
+    {
+        sanityBar.GetComponent<Animator>().SetTrigger("Close");
     }
 }

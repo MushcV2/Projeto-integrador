@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
         playerInteract.alreadyInteract = false;
         playerControl.isSitting = false;
         playerControl.canMove = true;
+        playerControl.GetComponent<SanityController>().GainSanity(playerControl.GetComponent<SanityController>().currentSanity / 2);
 
         Camera.main.GetComponent<CameraController>().stopFollowing = false;
 

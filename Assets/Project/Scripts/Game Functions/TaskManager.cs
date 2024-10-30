@@ -75,7 +75,7 @@ public class TaskManager : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
 
-            Debug.Log(_rng);
+            Debug.Log($"MISSAO ALEATORIA ESCOLHIDA: {_rng}");
 
             currentMission = dayMissions[_rng];
             missionTXT.text = currentMission.name;
