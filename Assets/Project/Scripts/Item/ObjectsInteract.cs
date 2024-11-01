@@ -9,7 +9,7 @@ public class ObjectsInteract : MonoBehaviour
     [Header("Item Variables")]
     [SerializeField] protected AudioSource audioS;
     [SerializeField] protected TaskManager task;
-    [SerializeField] protected TMP_Text popUpUsable;
+    [SerializeField] protected GameObject popUpUsable;
     [SerializeField] protected Collider objectCollider;
     [SerializeField] protected PlayerInteract playerInteract;
     [SerializeField] protected PlayerController player;
@@ -40,13 +40,13 @@ public class ObjectsInteract : MonoBehaviour
         objectCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
 
-        if (usable) popUpUsable.gameObject.SetActive(false);
+        if (usable) popUpUsable.SetActive(false);
     }
 
     public virtual void InteractFunction()
     {
         if (usable && popUpUsable != null)
-            popUpUsable.gameObject.SetActive(true);
+            popUpUsable.SetActive(true);
 
         rb.isKinematic = true;
         objectCollider.isTrigger = true;
@@ -62,7 +62,7 @@ public class ObjectsInteract : MonoBehaviour
     public virtual void StopInteract()
     {
         if (usable && popUpUsable != null)
-            popUpUsable.gameObject.SetActive(false);
+            popUpUsable.SetActive(false);
 
         rb.isKinematic = false;
         rb.useGravity = true;
@@ -85,7 +85,7 @@ public class ObjectsInteract : MonoBehaviour
             playerInteract.alreadyInteract = false;
 
             if (usable && popUpUsable != null)
-                popUpUsable.gameObject.SetActive(false);
+                popUpUsable.SetActive(false);
         }
     }
 

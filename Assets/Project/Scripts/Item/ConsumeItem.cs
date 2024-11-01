@@ -13,7 +13,7 @@ public class ConsumeItem : ObjectsInteract
             audioS.Play();
 
             playerInteract.alreadyInteract = false;
-            popUpUsable.gameObject.SetActive(false);
+            popUpUsable.SetActive(false);
 
             task.MissionCompleted(itemIndex);
 
