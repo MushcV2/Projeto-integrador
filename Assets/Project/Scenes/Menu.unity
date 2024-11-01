@@ -1611,6 +1611,7 @@ GameObject:
   - component: {fileID: 743852346}
   - component: {fileID: 743852345}
   - component: {fileID: 743852344}
+  - component: {fileID: 743852347}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -1720,6 +1721,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743852342}
   m_CullTransparentMesh: 1
+--- !u!114 &743852347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743852342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb3773cf735d87489f42fcebccc552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 2
 --- !u!1 &818670202
 GameObject:
   m_ObjectHideFlags: 0
@@ -3366,6 +3380,7 @@ GameObject:
   - component: {fileID: 1231829812}
   - component: {fileID: 1231829811}
   - component: {fileID: 1231829810}
+  - component: {fileID: 1231829813}
   m_Layer: 5
   m_Name: Configs
   m_TagString: Untagged
@@ -3475,6 +3490,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231829808}
   m_CullTransparentMesh: 1
+--- !u!114 &1231829813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231829808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb3773cf735d87489f42fcebccc552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 2
 --- !u!1 &1241400725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +3961,7 @@ GameObject:
   - component: {fileID: 1442896088}
   - component: {fileID: 1442896087}
   - component: {fileID: 1442896086}
+  - component: {fileID: 1442896089}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -4042,6 +4071,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442896084}
   m_CullTransparentMesh: 1
+--- !u!114 &1442896089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442896084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb3773cf735d87489f42fcebccc552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 2
 --- !u!1 &1486811312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,7 +4837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Configs
+  m_text: "Configura\xE7\xF5es"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4823,8 +4865,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 47
+  m_fontSizeBase: 47
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4960,6 +5002,7 @@ GameObject:
   - component: {fileID: 1691908570}
   - component: {fileID: 1691908569}
   - component: {fileID: 1691908568}
+  - component: {fileID: 1691908571}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -5069,6 +5112,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691908566}
   m_CullTransparentMesh: 1
+--- !u!114 &1691908571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691908566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb3773cf735d87489f42fcebccc552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 2
 --- !u!1 &1718296430
 GameObject:
   m_ObjectHideFlags: 0
@@ -6313,7 +6369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Creditos
+  m_text: "Cr\xE9ditos"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
