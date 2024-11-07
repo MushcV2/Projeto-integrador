@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController playerControl;
     [SerializeField] private SanityController sanityController;
     [SerializeField] private ScoreCounting scoreCounting;
+    [SerializeField] private CleaningTask cleaningTask;
     public Parazon parazon;
     private string[] textParts;
 
@@ -195,6 +196,7 @@ public class GameManager : MonoBehaviour
         if (playerControl.isCrouching) playerControl.Crounch();
 
         scoreCounting.ResetScore();
+        cleaningTask.ResetMission();
 
         multiplier = 1;
         minutes = 19;

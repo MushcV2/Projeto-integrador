@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CleaningTask : ObjectsInteract
 {
+    [SerializeField] private Transform[] randomPos;
     [SerializeField] private int stage;
     [SerializeField] private bool already;
     private bool havePlayer;
@@ -56,6 +58,7 @@ public class CleaningTask : ObjectsInteract
 
             player.canMove = true;
             finished = true;
+            already = false;
             dustObject.SetActive(false);
 
             task.MissionCompleted(itemIndex);
@@ -70,9 +73,22 @@ public class CleaningTask : ObjectsInteract
         Debug.Log("Mudou de estagio");
 
         stage++;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.2f);
 
         StartCoroutine(Clean());
+    }
+
+    public void ResetMission()
+    {
+        if (dustObject != null)
+        {
+            already = false;
+            finished = false;
+
+            dustObject.SetActive(true);
+            dustObject.transform.position = randomPos[Random.Range(0, randomPos.Length)].position;
+            stage = 0;
+        }
     }
 
     public override void InteractFunction()

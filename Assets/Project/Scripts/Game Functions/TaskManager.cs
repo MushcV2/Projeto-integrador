@@ -21,6 +21,7 @@ public class TaskManager : MonoBehaviour
 {
     private ScoreCounting scoreCounting;
 
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TMP_Text missionTXT;
     [SerializeField] private List <Mission> dayMissions;
@@ -92,6 +93,7 @@ public class TaskManager : MonoBehaviour
             missionCompleted = true;
 
             scoreCounting.taskScore += 150;
+            playerController.GainSanity(5);
 
             Invoke(nameof(CompletedCountAdd), 4.5f);
         }
