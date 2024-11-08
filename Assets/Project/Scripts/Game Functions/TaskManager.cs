@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class Mission
 {
     public int id;
     public string name;
+    public Sprite icon;
 
-    public void GetMission(int _id, string _name)
+    public void GetMission(int _id, string _name, Sprite _icon)
     {
         id = _id;
         name = _name;
+        icon = _icon;
     }
 }
 
@@ -21,6 +24,7 @@ public class TaskManager : MonoBehaviour
 {
     private ScoreCounting scoreCounting;
 
+    [SerializeField] private Image taskIcon;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TMP_Text missionTXT;
@@ -30,6 +34,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private int index;
     [SerializeField] private int missionsCompletedCount;
     [SerializeField] private bool missionCompleted;
+    [SerializeField] private int nullMissions;
     public string missionObject;
 
     private void Start()
@@ -37,12 +42,13 @@ public class TaskManager : MonoBehaviour
         scoreCounting = GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
         missionsCompletedCount = 0;
 
-        SetDayMissions();
-        RandomMission();
+        AddThreeMissions();
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K) && Application.isEditor) RandomMission();
+
         if (missionsCompletedCount == dayMissions.Count)
         {
             AllMissionsCompleted();
@@ -79,6 +85,13 @@ public class TaskManager : MonoBehaviour
             currentMission = dayMissions[_rng];
             missionTXT.text = currentMission.name;
 
+            if (currentMission.icon == null) taskIcon.gameObject.SetActive(false);
+            else
+            {
+                taskIcon.sprite = currentMission.icon;
+                taskIcon.gameObject.SetActive(true);
+            }
+
             yield return new WaitForSeconds(0.05f);
             dayMissions[_rng] = null;
         }
@@ -91,6 +104,7 @@ public class TaskManager : MonoBehaviour
         {
             index = _index;
             missionCompleted = true;
+            taskIcon.gameObject.SetActive(false);
 
             scoreCounting.taskScore += 150;
             playerController.GainSanity(5);
@@ -115,7 +129,7 @@ public class TaskManager : MonoBehaviour
         scoreCounting.taskScore += 400;
     }
 
-    public void SetDayMissions()
+    public void AddThreeMissions()
     {
         if (totalMissions.Count == 0) return;
 
@@ -129,6 +143,38 @@ public class TaskManager : MonoBehaviour
             totalMissions.Remove(totalMissions[_rng]);
         }
 
-        currentMission = dayMissions[0];
+        RandomMission();
+    }
+
+    public void SetDayMission()
+    {
+        int _nullMissions = 0;
+
+        foreach (var _mission in dayMissions)
+        {
+            if (_mission.name == null)
+            {
+                _nullMissions++;
+                Debug.Log("Missao nula");
+                Debug.Log($"Missoes nulas {_nullMissions}");
+            }
+        }
+
+        if (_nullMissions == dayMissions.Count) AddThreeMissions();
+        else
+        {
+            for (int i = dayMissions.Count - 1; i >= 0; i--)
+            {
+                if (dayMissions[i].name == null)
+                {
+                    int _rng = Random.Range(0, totalMissions.Count);
+
+                    dayMissions[i] = totalMissions[_rng];
+                    totalMissions.RemoveAt(_rng);
+                }
+            }
+
+            RandomMission();
+        }
     }
 }
