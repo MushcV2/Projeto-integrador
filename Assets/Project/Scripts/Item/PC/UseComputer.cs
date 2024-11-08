@@ -55,9 +55,7 @@ public class UseComputer : ObjectsInteract
         Cursor.visible = false;
 
         crossHair.gameObject.SetActive(true);
-        sanityBar.SetActive(true);
         taskPanel.SetActive(true);
-        clockPanel.SetActive(true);
 
         gameManager.multiplier = 1f;
         playerInteract.alreadyInteract = true;

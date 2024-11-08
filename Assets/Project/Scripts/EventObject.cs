@@ -24,6 +24,6 @@ public class EventObject : MonoBehaviour
             DisableObject();
         }
 
-        StartCoroutine(Disable());
+        if (gameObject.activeSelf) StartCoroutine(Disable());
     }
 }
