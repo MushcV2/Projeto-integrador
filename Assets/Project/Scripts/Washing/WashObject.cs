@@ -76,11 +76,12 @@ public class WashObject : MonoBehaviour
     {
         washProgression++;
 
-        if (washProgression == 100)
+        if (washProgression >= 100)
         {
             completedSound.Play();
 
-            scoreCounting.taskScore += 50;
+            washingTask.Washed();
+            scoreCounting.taskScore += 15;
 
             Debug.Log("Finalizado");
             yield break;

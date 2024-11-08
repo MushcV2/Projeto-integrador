@@ -5,6 +5,7 @@ using UnityEngine;
 public class WashingTask : ObjectsInteract
 {
     [SerializeField] private Transform lockPlayer;
+    [SerializeField] private int alreadyWashed;
     public bool isWashing;
 
     public override void InteractFunction()
@@ -41,6 +42,17 @@ public class WashingTask : ObjectsInteract
 
             player.canMove = true;
             cam.GetComponent<CameraController>().stopFollowing = false;
+        }
+    }
+
+    public void Washed()
+    {
+        alreadyWashed++;
+
+        if (alreadyWashed >= 3)
+        {
+            alreadyWashed = 0;
+            task.MissionCompleted(itemIndex);
         }
     }
 }

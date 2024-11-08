@@ -73,7 +73,7 @@ public class TaskManager : MonoBehaviour
         IEnumerator NewMission()
         {
             int _rng = Random.Range(0, dayMissions.Count);
-            while (dayMissions[_rng].name == null)
+            while (dayMissions[_rng] == null || dayMissions[_rng].name == null)
             {
                 _rng = Random.Range(0, dayMissions.Count);
 
@@ -106,7 +106,7 @@ public class TaskManager : MonoBehaviour
             missionCompleted = true;
             taskIcon.gameObject.SetActive(false);
 
-            scoreCounting.taskScore += 150;
+            scoreCounting.taskScore += 125;
             playerController.GainSanity(5);
 
             Invoke(nameof(CompletedCountAdd), 4.5f);
@@ -152,10 +152,9 @@ public class TaskManager : MonoBehaviour
 
         foreach (var _mission in dayMissions)
         {
-            if (_mission.name == null)
+            if (_mission == null || _mission.name == null)
             {
                 _nullMissions++;
-                Debug.Log("Missao nula");
                 Debug.Log($"Missoes nulas {_nullMissions}");
             }
         }
@@ -165,7 +164,7 @@ public class TaskManager : MonoBehaviour
         {
             for (int i = dayMissions.Count - 1; i >= 0; i--)
             {
-                if (dayMissions[i].name == null)
+                if (dayMissions[i] == null || dayMissions[i].name == null)
                 {
                     int _rng = Random.Range(0, totalMissions.Count);
 
