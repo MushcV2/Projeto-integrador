@@ -86,7 +86,7 @@ public class PlayerController : SanityController
             EnableClock();
         }
 
-        finalVelocity = (strafe.normalized * walkSpeed) + (forward.normalized * walkSpeed) + vertical;
+        finalVelocity = (strafe.normalized * currentSpeed) + (forward.normalized * currentSpeed) + vertical;
         controller.Move(finalVelocity * Time.deltaTime);
     }
 

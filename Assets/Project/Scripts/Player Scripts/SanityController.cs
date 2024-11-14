@@ -61,7 +61,7 @@ public class SanityController : MonoBehaviour
         sanityBar.gameObject.SetActive(true);
         Invoke(nameof(DisableBar), 3f);
 
-        currentSanity += Mathf.Min(currentSanity + _sanity, maxSanity);
+        currentSanity = Mathf.Min(currentSanity + _sanity, maxSanity);
     }
 
     public void LostSanity(float _sanity)
@@ -69,7 +69,7 @@ public class SanityController : MonoBehaviour
         sanityBar.gameObject.SetActive(true);
         Invoke(nameof(DisableBar), 3f);
 
-        currentSanity -= Mathf.Max(_sanity, 0);
+        currentSanity = Mathf.Max(currentSanity - _sanity, 0);
 
         if (currentSanity == 0)
             Debug.Log("Sem sanidade");

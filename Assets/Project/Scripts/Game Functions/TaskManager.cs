@@ -64,7 +64,7 @@ public class TaskManager : MonoBehaviour
             index = -1;
 
             missionTXT.text = "Missao concluida";
-            Invoke(nameof(RandomMission), 5);
+            Invoke(nameof(RandomMission), 30);
         }
     }
 
@@ -107,7 +107,7 @@ public class TaskManager : MonoBehaviour
             taskIcon.gameObject.SetActive(false);
 
             scoreCounting.taskScore += 125;
-            playerController.GainSanity(5);
+            playerController.GainSanity(10);
 
             Invoke(nameof(CompletedCountAdd), 4.5f);
         }
@@ -173,7 +173,7 @@ public class TaskManager : MonoBehaviour
                 }
             }
 
-            RandomMission();
+            Invoke(nameof(RandomMission), 30);
         }
     }
 }

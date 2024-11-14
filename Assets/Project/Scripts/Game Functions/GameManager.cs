@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         textParts = dayTXT.text.Split(';');
-        dayTXT.text = textParts[0] + " " + days;
-        dayComputerTXT.text = textParts[0] + " " + days;
+        dayTXT.text = textParts[0] + days.ToString();
+        dayComputerTXT.text = textParts[0] + days.ToString();
 
         timeIsRunning = true;
 
