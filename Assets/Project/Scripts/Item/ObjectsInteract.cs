@@ -9,7 +9,6 @@ public class ObjectsInteract : MonoBehaviour
     [Header("Item Variables")]
     [SerializeField] protected AudioSource audioS;
     [SerializeField] protected TaskManager task;
-    [SerializeField] protected GameObject popUpUsable;
     [SerializeField] protected Collider objectCollider;
     [SerializeField] protected PlayerInteract playerInteract;
     [SerializeField] protected PlayerController player;
@@ -24,15 +23,15 @@ public class ObjectsInteract : MonoBehaviour
     [SerializeField] protected int itemIndex;
     [SerializeField] protected bool usable;
     [SerializeField] protected bool canOpen;
+    public GameObject popUpUsable;
     public int dayToDestroy;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         playerInteract = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteract>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         task = GameObject.FindGameObjectWithTag("TaskManager").GetComponent<TaskManager>();
         itemPos = GameObject.FindGameObjectWithTag("ItemPos").GetComponent<Transform>();
-        //popUpUsable = FindAnyObjectByType<Canvas>().transform.Find("UsableTXT").GetComponent<TextMeshProUGUI>();
     }
 
     protected virtual void Start()

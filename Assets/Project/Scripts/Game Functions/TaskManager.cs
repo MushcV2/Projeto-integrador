@@ -126,14 +126,13 @@ public class TaskManager : MonoBehaviour
         CancelInvoke(nameof(RandomMission));
         missionTXT.text = "Todas as missões foram completas";
         taskIcon.gameObject.SetActive(false);
-
-        scoreCounting.taskScore += 400;
     }
 
     public void AddThreeMissions()
     {
         if (totalMissions.Count == 0) return;
 
+        missionsCompletedCount = 0;
         dayMissions.Clear();
 
         for (int i = 1; i <= 3; i++)

@@ -11,6 +11,7 @@ public class ComputerSystem : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController player;
     [SerializeField] private AppsManager[] appsManager;
+    [SerializeField] private UseComputer useComputer;
     [SerializeField] private Button turnOnButton;
     [SerializeField] private Button taskBarTurnOff;
     [SerializeField] private Button restartTaskBar;
@@ -35,7 +36,11 @@ public class ComputerSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && isOn && player.isSitting) audioS.Play();
+        if (Input.GetButtonDown("Fire1") && isOn && player.isSitting && useComputer.onPc)
+        {
+            audioS.clip = audioClip[2];
+            audioS.Play();
+        }
     }
 
     private void TurnOnPc()

@@ -14,6 +14,7 @@ public class Parazon : AppsManager
     [SerializeField] public Transform deliveryPoint;
     [SerializeField] private List<GameObject> itemsCart;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameObject popUsable;
     public Transform waitingToDelivery;
 
     protected override void Start()
@@ -52,13 +53,12 @@ public class Parazon : AppsManager
         foreach (GameObject _item in itemsCart)
         {
             GameObject _object = Instantiate(_item, waitingToDelivery.position, Quaternion.identity);
+            _object.GetComponent<ConsumeItem>().popUpUsable = popUsable;
 
             _object.GetComponent<ObjectsInteract>().dayToDestroy = gameManager.days + 2;
             _object.transform.parent = waitingToDelivery;
 
             yield return new WaitForSeconds(0.25f);
-
-            Debug.Log("Item Comprado");
         }
 
         taskManager.MissionCompleted(3);

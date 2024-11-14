@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     [Header("System")]
     [SerializeField] private Volume volume;
+    [SerializeField] private MotionBlur motionBlur;
     public Button forceNewDay;
     public bool activeCursor;
 
@@ -67,10 +68,18 @@ public class GameManager : MonoBehaviour
         else
             forceNewDay.gameObject.SetActive(false);
 
+        if (volume.profile.TryGet<MotionBlur>(out motionBlur))
+        {
+            if (PlayerPrefs.GetInt("HaveMotion") == 1) motionBlur.active = true;
+            else motionBlur.active = false;
+        }
+
+        /*
         if (volume != null && volume.profile != null)
             if (volume.profile.TryGet(out MotionBlur _blur))
                 if (PlayerPrefs.GetInt("HaveMotion") == 1) _blur.active = true;
                 else _blur.active = false;
+        */
     }
 
     private void Update()
