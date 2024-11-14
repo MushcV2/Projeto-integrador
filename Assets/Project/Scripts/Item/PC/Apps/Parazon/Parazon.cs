@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Parazon : AppsManager
 {
+    [SerializeField] private TaskManager taskManager;
     [SerializeField] private Button confirmItem;
     [SerializeField] private Button[] itemsButton;
     [SerializeField] private TMP_Text cartCountTXT;
@@ -60,6 +61,7 @@ public class Parazon : AppsManager
             Debug.Log("Item Comprado");
         }
 
+        taskManager.MissionCompleted(3);
         itemsCart.Clear();
     }
 

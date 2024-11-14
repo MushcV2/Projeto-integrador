@@ -7,6 +7,7 @@ public class ComputerSystem : MonoBehaviour
 {
     [Header("Computer Variables")]
     [SerializeField] private AudioSource audioS;
+    [SerializeField] private AudioClip[] audioClip;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController player;
     [SerializeField] private AppsManager[] appsManager;
@@ -42,6 +43,10 @@ public class ComputerSystem : MonoBehaviour
         if (!isOn && !canTurnOff) 
         {
             screenPanel.GetComponent<Animator>().SetTrigger("TurnOn");
+
+            audioS.clip = audioClip[0];
+            audioS.Play();
+
             Invoke(nameof(ActiveApps), 1.5f);
             Invoke(nameof(CanTurnOff), 2);
 
@@ -52,6 +57,9 @@ public class ComputerSystem : MonoBehaviour
         {
             screenPanel.GetComponent<Animator>().SetTrigger("TurnOff");
             taskBarPanel.transform.Find("SystemMenu").gameObject.SetActive(false);
+
+            audioS.clip = audioClip[1];
+            audioS.Play();
 
             foreach (var app in appsManager)
             {
@@ -90,6 +98,9 @@ public class ComputerSystem : MonoBehaviour
 
         screenPanel.GetComponent<Animator>().SetTrigger("TurnOff");
         taskBarPanel.transform.Find("SystemMenu").gameObject.SetActive(false);
+
+        audioS.clip = audioClip[1];
+        audioS.Play();
 
         foreach (var app in appsManager)
         {
