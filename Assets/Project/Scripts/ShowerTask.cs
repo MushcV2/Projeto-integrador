@@ -32,6 +32,8 @@ public class ShowerTask : ObjectsInteract
 
         playerInteract.alreadyInteract = false;
         playerInteract.interactObject = null;
+
+        task.MissionCompleted(itemIndex);
     }
 
     private void ReturnToMove()
