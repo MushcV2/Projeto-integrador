@@ -35,6 +35,12 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject creditsScreen;
     [SerializeField] private Button closeCreditsScreen;
     [SerializeField] private Button openCreditsScreen;
+
+    [Header("Controls UI")]
+    [SerializeField] private GameObject controlScreen;
+    [SerializeField] private Button closeControlScreen;
+    [SerializeField] private Button openControlScreen;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -49,6 +55,7 @@ public class MenuController : MonoBehaviour
         videoScreen.SetActive(false);
         audioScreen.SetActive(false);
         creditsScreen.SetActive(false);
+        controlScreen.SetActive(false);
 
         playButton.onClick.AddListener(() => StartCoroutine(LoadGameScene()));
 
@@ -79,6 +86,13 @@ public class MenuController : MonoBehaviour
 
         openCreditsScreen.onClick.AddListener(() => OpenScreen("credits"));
         closeCreditsScreen.onClick.AddListener(() => CloseScreen("credits"));
+
+        #endregion
+
+        #region Control Screen
+
+        openControlScreen.onClick.AddListener(() => OpenScreen("control"));
+        closeControlScreen.onClick.AddListener(() => CloseScreen("control"));
 
         #endregion
 
@@ -147,6 +161,10 @@ public class MenuController : MonoBehaviour
             case "credits":
                 creditsScreen.SetActive(true);
                 break;
+
+            case "control":
+                controlScreen.SetActive(true);
+                break;
         }
     }
 
@@ -177,6 +195,10 @@ public class MenuController : MonoBehaviour
 
             case "credits":
                 creditsScreen.SetActive(false);
+                break;
+
+            case "control":
+                controlScreen.SetActive(false);
                 break;
         }
     }
