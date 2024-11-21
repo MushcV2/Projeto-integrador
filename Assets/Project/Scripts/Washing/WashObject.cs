@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class WashObject : MonoBehaviour
@@ -9,12 +10,14 @@ public class WashObject : MonoBehaviour
     private GameManager gameManager;
     private Rigidbody rb;
 
-    [SerializeField] private WashingTask washingTask; 
+    [SerializeField] private WashingTask washingTask;
+    [SerializeField] private Image feedbackSlider;
     [SerializeField] private AudioSource completedSound;
     [SerializeField] private float washProgression;
     [SerializeField] private float offset;
     public bool touchOnObject;
     private bool firstTime;
+    private bool canWash;
 
     private void Start()
     {
@@ -22,12 +25,22 @@ public class WashObject : MonoBehaviour
         scoreCounting =GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
         rb = GetComponent<Rigidbody>();
 
+       // gameObject.layer = LayerMask.NameToLayer("Default");
+
+        feedbackSlider.fillAmount = 0;
+        feedbackSlider.gameObject.SetActive(false);
         firstTime = true;
+    }
+
+    private void Update()
+    {
+       // if (washingTask.isWashing && gameObject.layer != LayerMask.NameToLayer("Interact")) gameObject.layer = LayerMask.NameToLayer("Interact");
+       // else gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     private void OnMouseDrag()
     {
-        if (touchOnObject && !firstTime) return;
+        if (touchOnObject && !firstTime && !washingTask.isWashing) return;
 
         rb.useGravity = false;
         firstTime = false;
@@ -60,25 +73,33 @@ public class WashObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider _other)
     {
-        if (_other.CompareTag("Water"))
+        if (_other.CompareTag("Water") && washProgression < 100)
         {
+            canWash = true;
+
             StartCoroutine(WashProgression());
+            feedbackSlider.gameObject.SetActive(true);
+
             Debug.Log("Esta na agua");
         }
     }
 
     private void OnTriggerExit(Collider _other)
     {
-        if (_other.CompareTag("Water")) StopCoroutine(WashProgression());
+        if (_other.CompareTag("Water")) canWash = false;
     }
 
     private IEnumerator WashProgression()
     {
+        if (!canWash) yield break;
+
         washProgression++;
+        feedbackSlider.fillAmount = washProgression / 100;
 
         if (washProgression >= 100)
         {
             completedSound.Play();
+            feedbackSlider.gameObject.SetActive(false);
 
             washingTask.Washed();
             scoreCounting.taskScore += 15;
