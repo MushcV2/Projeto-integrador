@@ -9,6 +9,7 @@ public class AppsManager : MonoBehaviour
     [SerializeField] private Transform windowPanel;
     [SerializeField] private RectTransform windowRect;
     [SerializeField] private Vector3 initialPos;
+    [SerializeField] protected bool isActive;
 
     protected virtual void Awake()
     {
@@ -16,6 +17,8 @@ public class AppsManager : MonoBehaviour
         windowPanel.gameObject.SetActive(false);
 
         initialPos = windowRect.position;
+
+        isActive = false;
     }
 
     protected virtual void Start()
@@ -26,19 +29,20 @@ public class AppsManager : MonoBehaviour
 
     protected virtual void OpenWindow()
     {
-        windowPanel.gameObject.SetActive(true);
-        GetComponent<Button>().enabled = false;
+        if (isActive) return;
 
-        Debug.Log("Ativado");
+        windowPanel.gameObject.SetActive(true);
+
+        GetComponent<Button>().enabled = false;
+        isActive = true;
     }
 
     public void CloseWindow()
     {
         windowPanel.gameObject.SetActive(false);
         windowRect.position = initialPos;
+        isActive = false;
 
         GetComponent<Button>().enabled = true;
-
-        Debug.Log("Desativado");
     }
 }

@@ -15,6 +15,7 @@ public class Parazon : AppsManager
     [SerializeField] private List<GameObject> itemsCart;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject popUsable;
+    [SerializeField] private SanityController sanityController;
     public Transform waitingToDelivery;
 
     protected override void Start()
@@ -81,6 +82,7 @@ public class Parazon : AppsManager
         {
             if (_item.gameObject.GetComponent<ObjectsInteract>().dayToDestroy == gameManager.days)
             {
+                sanityController.LostSanity(5);
                 Destroy(_item.gameObject);
                 Debug.Log($"Item {_item.gameObject.name} destruido");
             }
