@@ -88,4 +88,16 @@ public class Parazon : AppsManager
             }
         }
     }
+
+    protected override void OpenWindow()
+    {
+        base.OpenWindow();
+        controlWindows.isActive = true;
+    }
+
+    public override void CloseWindow()
+    {
+        base.CloseWindow();
+        controlWindows.isActive = false;
+    }
 }

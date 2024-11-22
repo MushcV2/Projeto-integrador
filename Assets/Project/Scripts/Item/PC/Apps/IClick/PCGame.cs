@@ -8,15 +8,15 @@ public class PCGame : AppsManager
 {
     [Header("Updgrade Buttons")]
     [SerializeField] private Button[] updgradeButtons;
-    [SerializeField] private Button updgrade_1;
-    [SerializeField] private Button updgrade_2;
-    [SerializeField] private Button updgrade_3;
-    [SerializeField] private Button updgrade_4;
 
     [Header("System")]
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private Button clickerButton;
     [SerializeField] private TMP_Text pointsTXT;
+    [SerializeField] private TMP_Text pointPerClickTXT;
+    [SerializeField] private TMP_Text multiplierTXT;
     [SerializeField] private int points;
+    [SerializeField] private int pointsPerClick;
     [SerializeField] private float multiplier;
 
     protected override void Start()
@@ -26,6 +26,8 @@ public class PCGame : AppsManager
         clickerButton.onClick.AddListener(EarnPoints);
 
         pointsTXT.text = points.ToString("N0");
+        pointPerClickTXT.text = "CPS: " + (multiplier * pointsPerClick).ToString();
+        multiplierTXT.text = "Mult: " + multiplier.ToString();
 
         updgradeButtons[0].onClick.AddListener(() => BuyUpdgrade(100 , 1.5f, 0));
         updgradeButtons[1].onClick.AddListener(() => BuyUpdgrade(800, 3.5f, 1));
@@ -35,7 +37,8 @@ public class PCGame : AppsManager
 
     private void EarnPoints()
     {
-        points = Mathf.RoundToInt(multiplier * points);
+        points += Mathf.RoundToInt(multiplier * pointsPerClick);
+
         pointsTXT.text = points.ToString("N0");
     }
 
@@ -52,6 +55,25 @@ public class PCGame : AppsManager
         LostPoints(_value);
 
         multiplier += multiplier;
+        multiplierTXT.text = "Mult: " + multiplier.ToString();
+        pointPerClickTXT.text = "CPS: " + (multiplier * pointsPerClick).ToString();
+
         updgradeButtons[_index].gameObject.SetActive(false);
+    }
+
+    protected override void OpenWindow()
+    {
+        base.OpenWindow();
+
+        controlWindows.isActive = true;
+        gameManager.multiplier = 4;
+    }
+
+    public override void CloseWindow()
+    {
+        base.CloseWindow();
+
+        controlWindows.isActive = false;
+        gameManager.multiplier = 2;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class AppsManager : MonoBehaviour
 {
+    [SerializeField] protected ControlWindows controlWindows;
     [SerializeField] private Transform windowPanel;
     [SerializeField] private RectTransform windowRect;
     [SerializeField] private Vector3 initialPos;
@@ -29,19 +30,17 @@ public class AppsManager : MonoBehaviour
 
     protected virtual void OpenWindow()
     {
-        if (isActive) return;
+        if (controlWindows.isActive) return;
 
         windowPanel.gameObject.SetActive(true);
 
         GetComponent<Button>().enabled = false;
-        isActive = true;
     }
 
-    public void CloseWindow()
+    public virtual void CloseWindow()
     {
         windowPanel.gameObject.SetActive(false);
         windowRect.position = initialPos;
-        isActive = false;
 
         GetComponent<Button>().enabled = true;
     }
