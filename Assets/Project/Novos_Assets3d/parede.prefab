@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8348153213091303735}
   - component: {fileID: 8190279634282927312}
   - component: {fileID: 6033039188754269188}
+  - component: {fileID: 7151378128260028074}
   m_Layer: 0
   m_Name: parede
   m_TagString: Untagged
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7151378128260028074
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027696755160055238}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0029999996, y: 0.020000005, z: 0.030000007}
+  m_Center: {x: -0.0085, y: 0, z: 0.015000003}
