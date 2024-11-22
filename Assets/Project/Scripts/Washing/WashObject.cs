@@ -25,7 +25,7 @@ public class WashObject : MonoBehaviour
         scoreCounting =GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
         rb = GetComponent<Rigidbody>();
 
-       // gameObject.layer = LayerMask.NameToLayer("Default");
+        gameObject.layer = LayerMask.NameToLayer("Default");
 
         feedbackSlider.fillAmount = 0;
         feedbackSlider.gameObject.SetActive(false);
@@ -34,21 +34,24 @@ public class WashObject : MonoBehaviour
 
     private void Update()
     {
-       // if (washingTask.isWashing && gameObject.layer != LayerMask.NameToLayer("Interact")) gameObject.layer = LayerMask.NameToLayer("Interact");
-       // else gameObject.layer = LayerMask.NameToLayer("Default");
+       if (washingTask.isWashing && gameObject.layer != LayerMask.NameToLayer("Interact")) gameObject.layer = LayerMask.NameToLayer("Interact");
+       else gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     private void OnMouseDrag()
     {
-        if (touchOnObject && !firstTime && !washingTask.isWashing) return;
+        if (touchOnObject && !firstTime) return;
 
-        rb.useGravity = false;
-        firstTime = false;
+        if (gameObject.layer == LayerMask.NameToLayer("Interact"))
+        {
+            rb.useGravity = false;
+            firstTime = false;
 
-        Vector3 _mousePos = Input.mousePosition;
-        _mousePos.z = offset;
+            Vector3 _mousePos = Input.mousePosition;
+            _mousePos.z = offset;
 
-        transform.position = Camera.main.ScreenToWorldPoint(_mousePos);
+            transform.position = Camera.main.ScreenToWorldPoint(_mousePos);
+        }
     }
 
     private void OnMouseDown()

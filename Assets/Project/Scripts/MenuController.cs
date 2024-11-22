@@ -25,6 +25,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Button closeVideoScreen;
     [SerializeField] private Button openVideoScreen;
     [SerializeField] private Button[] graphicsButton;
+    [SerializeField] private Transform currentPreset;
+    [SerializeField] private float distance;
 
     [Header("Audio UI")]
     [SerializeField] private GameObject audioScreen;
@@ -49,14 +51,13 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("GraphicsValue"));
-        Debug.Log(QualitySettings.GetQualitySettings());
+        currentPreset.position = new Vector3(graphicsButton[PlayerPrefs.GetInt("GraphicsValue")].transform.position.x + distance, graphicsButton[PlayerPrefs.GetInt("GraphicsValue")].transform.position.y, graphicsButton[PlayerPrefs.GetInt("GraphicsValue")].transform.position.z);
 
         configsBG.SetActive(false);
         videoScreen.SetActive(false);
         audioScreen.SetActive(false);
         creditsScreen.SetActive(false);
         controlScreen.SetActive(false);
-
         playButton.onClick.AddListener(() => StartCoroutine(LoadGameScene()));
 
         configsButton.onClick.AddListener(() => OpenScreen("config"));
@@ -208,7 +209,7 @@ public class MenuController : MonoBehaviour
         QualitySettings.SetQualityLevel(_value);
         PlayerPrefs.SetInt("GraphicsValue", _value);
 
-        Debug.Log(QualitySettings.names[_value]);
+        currentPreset.position = new Vector3(graphicsButton[_value].transform.position.x + distance, graphicsButton[_value].transform.position.y, graphicsButton[_value].transform.position.z);
     }
 
     private void MotionBlur(bool _isOn)

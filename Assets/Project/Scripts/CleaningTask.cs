@@ -8,57 +8,35 @@ public class CleaningTask : ObjectsInteract
     [SerializeField] private Transform[] randomPos;
     [SerializeField] private int stage;
     [SerializeField] private bool already;
+    private GameObject dustObject;
     private bool havePlayer;
     private bool canClean;
     private bool finished;
-    private GameObject dustObject;
+    private bool startedCleaning;
 
     private void Update()
     {
-        if (havePlayer && !finished)
-        {
-            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            Physics.Raycast(_ray, out RaycastHit _hit, 100);
-
-            if (_hit.collider.CompareTag("Dust"))
-            {
-                if (dustObject == null) dustObject = _hit.collider.gameObject;
-                canClean = true;
-            }
-            else canClean = false;
-
-            if (Input.GetButtonDown("Fire1") && !already && canClean)
-            {
-                StartCoroutine(Clean());
-                player.canMove = false;
-            }
-
-            /*
-            if (Input.GetButtonDown("Fire1") && already && canClean)
-            {
-                StopCoroutine(Clean());
-
-                cam.GetComponent<CameraController>().stopFollowing = false;
-                already = false;
-                player.canMove = true;
-            }
-            */
-        }
+        if (havePlayer && !finished) VerifyDust();
     }
 
 
     private IEnumerator Clean()
     {
         already = true;
+        startedCleaning = true;
 
-        if (stage == 4)
+        if (!audioS.isPlaying) audioS.Play();
+
+        if (stage >= 4)
         {
             cam.GetComponent<CameraController>().stopFollowing = false;
+            audioS.Stop();
 
             player.canMove = true;
             finished = true;
             already = false;
+
+            popUpUsable.SetActive(false);
             dustObject.SetActive(false);
 
             task.MissionCompleted(itemIndex);
@@ -88,6 +66,32 @@ public class CleaningTask : ObjectsInteract
             dustObject.SetActive(true);
             dustObject.transform.position = randomPos[Random.Range(0, randomPos.Length)].position;
             stage = 0;
+        }
+    }
+
+    private void VerifyDust()
+    {
+        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        Physics.Raycast(_ray, out RaycastHit _hit, 3);
+
+        if (_hit.collider.CompareTag("Dust"))
+        {
+            if (dustObject == null) dustObject = _hit.collider.gameObject;
+            if (!startedCleaning) popUpUsable.SetActive(true);
+
+            canClean = true;
+        }
+        else
+        {
+            if (!startedCleaning) popUpUsable.SetActive(false);
+            canClean = false;
+        }
+
+        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.F) && !already && canClean)
+        {
+            StartCoroutine(Clean());
+            player.canMove = false;
         }
     }
 

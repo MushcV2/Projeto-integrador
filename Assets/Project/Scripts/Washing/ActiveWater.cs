@@ -20,12 +20,12 @@ public class ActiveWater : MonoBehaviour
     private void Update()
     {
         if (washingTask.isWashing && gameObject.layer != LayerMask.NameToLayer("Interact")) gameObject.layer = LayerMask.NameToLayer("Interact");
-        //else gameObject.layer = LayerMask.NameToLayer("Default");
+        else gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     private void OnMouseDown()
     {
-        if (!waterIsActive)
+        if (!waterIsActive && gameObject.layer == LayerMask.NameToLayer("Interact"))
         {
             waterIsActive = true;
             waterAudio.Play();
@@ -33,7 +33,7 @@ public class ActiveWater : MonoBehaviour
             waterEffect.SetActive(true);
         }
 
-        else
+        else if (waterIsActive && gameObject.layer == LayerMask.NameToLayer("Interact"))
         {
             waterIsActive = false;
             waterAudio.Stop();

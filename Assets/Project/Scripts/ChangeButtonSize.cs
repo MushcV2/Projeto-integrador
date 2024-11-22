@@ -17,11 +17,11 @@ public class ChangeButtonSize : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        imageTransform.localScale = Vector3.Lerp(imageTransform.localScale, new Vector3(size, size, size), 10f);
+        imageTransform.localScale *= size;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        imageTransform.localScale = Vector3.Lerp(imageTransform.localScale, defaultScale, 10f);
+        imageTransform.localScale = defaultScale;
     }
 }
