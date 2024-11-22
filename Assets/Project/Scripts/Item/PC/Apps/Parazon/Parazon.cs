@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Parazon : AppsManager
 {
@@ -13,7 +14,7 @@ public class Parazon : AppsManager
     [SerializeField] private TMP_Text cartCountTXT;
     [SerializeField] private TMP_Text moneyTXT;
     [SerializeField] public Transform deliveryPoint;
-    [SerializeField] private Dictionary<GameObject, int> itemsCart;
+    [SerializeField] private Dictionary<GameObject, int> itemsCart = new Dictionary<GameObject, int>();
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject popUsable;
     [SerializeField] private SanityController sanityController;
@@ -40,6 +41,12 @@ public class Parazon : AppsManager
 
     private void AddOnCart(int _index, GameObject _itemOBJ, int _price)
     {
+        if (money - _price <= 0)
+        {
+            Debug.Log("Sem dinheiro");
+            return;
+        }
+
         Debug.Log("O item comprado tem o index de: " +  _index);
 
         itemsCart.Add(_itemOBJ, _price);
@@ -48,7 +55,7 @@ public class Parazon : AppsManager
 
     private IEnumerator ConfirmBuy()
     {
-        if (itemsCart.Count == 0) yield break;
+        if (itemsCart.Count <= 0) yield break;
 
         Debug.Log("Confirmado");
 
@@ -56,13 +63,7 @@ public class Parazon : AppsManager
 
         foreach (var _item in itemsCart)
         {
-            if (_item.Value - money <= 0)
-            {
-                Debug.Log("Sem dinheiro");
-                continue;
-            }
-
-            money = Mathf.Max(money - _item.Value, 0);
+            money -= _item.Value;
             moneyTXT.text = "$" + money.ToString();
 
             GameObject _object = Instantiate(_item.Key, waitingToDelivery.position, Quaternion.identity);
@@ -116,5 +117,6 @@ public class Parazon : AppsManager
     public void GiveMoney()
     {
         money += 150;
+        moneyTXT.text = "$" + money.ToString();
     }
 }
