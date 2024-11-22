@@ -167,6 +167,7 @@ public class GameManager : MonoBehaviour
         {
             parazon.DeliverItems();
             parazon.DestroyItems();
+            parazon.GiveMoney();
         }
 
         Cursor.lockState = CursorLockMode.None;

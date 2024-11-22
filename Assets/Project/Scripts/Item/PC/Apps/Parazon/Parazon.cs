@@ -11,11 +11,13 @@ public class Parazon : AppsManager
     [SerializeField] private Button confirmItem;
     [SerializeField] private Button[] itemsButton;
     [SerializeField] private TMP_Text cartCountTXT;
+    [SerializeField] private TMP_Text moneyTXT;
     [SerializeField] public Transform deliveryPoint;
-    [SerializeField] private List<GameObject> itemsCart;
+    [SerializeField] private Dictionary<GameObject, int> itemsCart;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject popUsable;
     [SerializeField] private SanityController sanityController;
+    [SerializeField] private int money = 150;
     public Transform waitingToDelivery;
 
     protected override void Start()
@@ -26,20 +28,21 @@ public class Parazon : AppsManager
 
         foreach (Button _button in itemsButton)
         {
-            _button.onClick.AddListener(() => AddOnCart(_button.GetComponent<ItemIndex>().index, _button.GetComponent<ItemIndex>().item));
+            _button.onClick.AddListener(() => AddOnCart(_button.GetComponent<ItemIndex>().index, _button.GetComponent<ItemIndex>().item, _button.GetComponent<ItemIndex>().price));
         }
 
         FindObjectOfType<GameManager>().parazon = this;
         waitingToDelivery.gameObject.SetActive(false);
 
+        moneyTXT.text = "$" + money.ToString();
         cartCountTXT.text = "Empty";
     }
 
-    private void AddOnCart(int _index, GameObject _itemOBJ)
+    private void AddOnCart(int _index, GameObject _itemOBJ, int _price)
     {
         Debug.Log("O item comprado tem o index de: " +  _index);
 
-        itemsCart.Add(_itemOBJ);
+        itemsCart.Add(_itemOBJ, _price);
         cartCountTXT.text = itemsCart.Count.ToString();
     }
 
@@ -51,9 +54,18 @@ public class Parazon : AppsManager
 
         cartCountTXT.text = "Empty";
 
-        foreach (GameObject _item in itemsCart)
+        foreach (var _item in itemsCart)
         {
-            GameObject _object = Instantiate(_item, waitingToDelivery.position, Quaternion.identity);
+            if (_item.Value - money <= 0)
+            {
+                Debug.Log("Sem dinheiro");
+                continue;
+            }
+
+            money = Mathf.Max(money - _item.Value, 0);
+            moneyTXT.text = "$" + money.ToString();
+
+            GameObject _object = Instantiate(_item.Key, waitingToDelivery.position, Quaternion.identity);
             _object.GetComponent<ConsumeItem>().popUpUsable = popUsable;
 
             _object.GetComponent<ObjectsInteract>().dayToDestroy = gameManager.days + 2;
@@ -99,5 +111,10 @@ public class Parazon : AppsManager
     {
         base.CloseWindow();
         controlWindows.isActive = false;
+    }
+
+    public void GiveMoney()
+    {
+        money += 150;
     }
 }
