@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActiveWater : MonoBehaviour
 {
-    [SerializeField] private GameObject waterEffect;
+    [SerializeField] private ParticleSystem waterEffect;
     [SerializeField] private AudioSource waterAudio;
     [SerializeField] private WashingTask washingTask;
     private bool waterIsActive;
@@ -12,9 +12,9 @@ public class ActiveWater : MonoBehaviour
     private void Start()
     {
         waterAudio = GetComponent<AudioSource>();
-        waterEffect.SetActive(false);
 
         gameObject.layer = LayerMask.NameToLayer("Default");
+        waterEffect.Stop();
     }
 
     private void Update()
@@ -29,16 +29,15 @@ public class ActiveWater : MonoBehaviour
         {
             waterIsActive = true;
             waterAudio.Play();
+            waterEffect.Play();
 
-            waterEffect.SetActive(true);
         }
 
         else if (waterIsActive && gameObject.layer == LayerMask.NameToLayer("Interact"))
         {
             waterIsActive = false;
             waterAudio.Stop();
-
-            waterEffect.SetActive(false);
+            waterEffect.Stop();
         }
     }
 }
