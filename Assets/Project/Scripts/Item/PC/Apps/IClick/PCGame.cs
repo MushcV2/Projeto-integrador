@@ -29,10 +29,10 @@ public class PCGame : AppsManager
         pointPerClickTXT.text = "CPS: " + (multiplier * pointsPerClick).ToString();
         multiplierTXT.text = "Mult: " + multiplier.ToString();
 
-        updgradeButtons[0].onClick.AddListener(() => BuyUpdgrade(100 , 1.5f, 0));
-        updgradeButtons[1].onClick.AddListener(() => BuyUpdgrade(800, 3.5f, 1));
-        updgradeButtons[2].onClick.AddListener(() => BuyUpdgrade(6800, 5f, 2));
-        updgradeButtons[3].onClick.AddListener(() => BuyUpdgrade(25000, 10f, 3));
+        updgradeButtons[0].onClick.AddListener(() => BuyUpdgrade(99 , 1.5f, 0));
+        updgradeButtons[1].onClick.AddListener(() => BuyUpdgrade(799, 3.5f, 1));
+        updgradeButtons[2].onClick.AddListener(() => BuyUpdgrade(6799, 5f, 2));
+        updgradeButtons[3].onClick.AddListener(() => BuyUpdgrade(24999, 10f, 3));
     }
 
     private void EarnPoints()
