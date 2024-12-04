@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -178,6 +179,8 @@ public class GameManager : MonoBehaviour
 
     private void StartNewDay()
     {
+        if (days >= 4) SceneManager.LoadScene("Menu");
+
         Debug.Log("Novo dia");
 
         dayPointsPanel.SetActive(false);

@@ -88,6 +88,9 @@ public class ScoreCounting : MonoBehaviour
         finalScore += dayScore;
         Debug.Log($"A pontuação foi de: {finalScore}");
 
-        if (gameManager.days >= 6) dayScoreTXT.text = finalScore.ToString();
+        if (gameManager.days >= 3)
+        {
+            dayTXT.text = "Final";
+        }
     }
 }
