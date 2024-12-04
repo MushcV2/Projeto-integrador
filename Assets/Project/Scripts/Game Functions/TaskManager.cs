@@ -24,6 +24,7 @@ public class TaskManager : MonoBehaviour
 {
     private ScoreCounting scoreCounting;
 
+    [SerializeField] private AudioSource finishedSoundEffect;
     [SerializeField] private Image taskIcon;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject missionPanel;
@@ -104,6 +105,7 @@ public class TaskManager : MonoBehaviour
         {
             index = _index;
             missionCompleted = true;
+            finishedSoundEffect.Play();
             taskIcon.gameObject.SetActive(false);
 
             scoreCounting.taskScore += 125;
