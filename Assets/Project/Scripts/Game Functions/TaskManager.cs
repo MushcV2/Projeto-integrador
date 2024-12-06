@@ -8,15 +8,17 @@ using Unity.VisualScripting;
 [System.Serializable]
 public class Mission
 {
+    public AudioClip missionAudio;
+    public Sprite icon;
     public int id;
     public string name;
-    public Sprite icon;
 
-    public void GetMission(int _id, string _name, Sprite _icon)
+    public void GetMission(int _id, string _name, Sprite _icon, AudioClip _audio)
     {
         id = _id;
         name = _name;
         icon = _icon;
+        missionAudio = _audio;
     }
 }
 
@@ -24,7 +26,8 @@ public class TaskManager : MonoBehaviour
 {
     private ScoreCounting scoreCounting;
 
-    [SerializeField] private AudioSource finishedSoundEffect;
+    [SerializeField] private AudioClip completedAudio;
+    [SerializeField] private AudioSource missionAudio;
     [SerializeField] private Image taskIcon;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject missionPanel;
@@ -41,6 +44,8 @@ public class TaskManager : MonoBehaviour
     private void Start()
     {
         scoreCounting = GameObject.FindGameObjectWithTag("ScoreCounting").GetComponent<ScoreCounting>();
+        missionAudio = GetComponent<AudioSource>();
+
         missionsCompletedCount = 0;
 
         AddThreeMissions();
@@ -86,6 +91,9 @@ public class TaskManager : MonoBehaviour
             currentMission = dayMissions[_rng];
             missionTXT.text = currentMission.name;
 
+            missionAudio.clip = currentMission.missionAudio;
+            missionAudio.Play();
+
             if (currentMission.icon == null) taskIcon.gameObject.SetActive(false);
             else
             {
@@ -105,7 +113,10 @@ public class TaskManager : MonoBehaviour
         {
             index = _index;
             missionCompleted = true;
-            finishedSoundEffect.Play();
+
+            missionAudio.clip = completedAudio;
+            missionAudio.Play();
+
             taskIcon.gameObject.SetActive(false);
 
             scoreCounting.taskScore += 125;
