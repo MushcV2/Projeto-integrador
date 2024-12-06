@@ -152,7 +152,7 @@ TextureImporter:
         width: 14
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,6 +160,111 @@ TextureImporter:
       bones: []
       spriteID: b84e74ffc1c91a0428ecb12a72017384
       internalID: -753580714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keyboard Black Corn_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 208
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 241a3c9582038cd45a30677b29a95ea2
+      internalID: -420377935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keyboard Black Corn_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 192
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0066921f042656542a033400b95a6a19
+      internalID: 853869793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keyboard Black Corn_4
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 192
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd7206af1605d0746800f23d59e3a1d1
+      internalID: 1247494025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keyboard Black Corn_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 192
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12459d9714624884b90fea6cbf610ab4
+      internalID: -1769497408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keyboard Black Corn_6
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 240
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb574cf6cc32ae947ab558f7b96858a6
+      internalID: 2098409567
       vertices: []
       indices: 
       edges: []
@@ -177,6 +282,11 @@ TextureImporter:
     nameFileIdTable:
       Keyboard Black Corn_0: 437006472
       Keyboard Black Corn_1: -753580714
+      Keyboard Black Corn_2: -420377935
+      Keyboard Black Corn_3: 853869793
+      Keyboard Black Corn_4: 1247494025
+      Keyboard Black Corn_5: -1769497408
+      Keyboard Black Corn_6: 2098409567
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
