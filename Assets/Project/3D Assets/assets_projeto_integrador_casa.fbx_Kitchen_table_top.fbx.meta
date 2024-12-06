@@ -38,7 +38,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Wood063_2K_Roughness
-    second: {fileID: 2800000, guid: e4f2aa7f9d4a28949ba5bbc28538457c, type: 3}
+    second: {fileID: 2800000, guid: 339330e82d521884e96ab802ad53be8a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

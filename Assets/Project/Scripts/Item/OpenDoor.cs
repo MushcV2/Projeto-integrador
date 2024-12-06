@@ -15,7 +15,7 @@ public class OpenDoor : ObjectsInteract
     {
         if (!canOpen)
         {
-            anim.SetTrigger("OpenDoor");
+            anim.SetTrigger("Interagir");
 
             playerInteract.alreadyInteract = false;
 
@@ -33,7 +33,7 @@ public class OpenDoor : ObjectsInteract
 
     public override void StopInteract()
     {
-        anim.SetTrigger("CloseDoor");
+        anim.SetTrigger("Interagir");
 
         audioS.clip = doorsSound[1];
         audioS.Play();
