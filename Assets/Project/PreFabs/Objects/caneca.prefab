@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5222921581049998519}
   - component: {fileID: 1400543198722435350}
   - component: {fileID: 5821438319697343822}
+  - component: {fileID: 6648800456866223985}
   m_Layer: 6
   m_Name: caneca
   m_TagString: Untagged
@@ -138,3 +139,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5078199, y: 0.5706815, z: 0.50240624}
   m_Center: {x: 0.5076741, y: 0.28534076, z: 0}
+--- !u!54 &6648800456866223985
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042756350951063423}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

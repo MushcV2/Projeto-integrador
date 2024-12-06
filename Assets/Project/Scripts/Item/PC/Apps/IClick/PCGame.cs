@@ -10,6 +10,8 @@ public class PCGame : AppsManager
     [SerializeField] private Button[] updgradeButtons;
 
     [Header("System")]
+    [SerializeField] private Sprite defaultButtonSprite;
+    [SerializeField] private Sprite clickedButtonSprite;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Button clickerButton;
     [SerializeField] private TMP_Text pointsTXT;
@@ -37,6 +39,9 @@ public class PCGame : AppsManager
 
     private void EarnPoints()
     {
+        clickerButton.image.sprite = clickedButtonSprite;
+        Invoke(nameof(ChangeSprite), 0.25f);
+
         points += Mathf.RoundToInt(multiplier * pointsPerClick);
 
         pointsTXT.text = points.ToString("N0");
@@ -59,6 +64,11 @@ public class PCGame : AppsManager
         pointPerClickTXT.text = "CPS: " + (multiplier * pointsPerClick).ToString();
 
         updgradeButtons[_index].gameObject.SetActive(false);
+    }
+
+    private void ChangeSprite()
+    {
+        clickerButton.image.sprite = defaultButtonSprite;
     }
 
     protected override void OpenWindow()

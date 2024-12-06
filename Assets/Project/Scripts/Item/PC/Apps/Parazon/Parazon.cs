@@ -67,7 +67,7 @@ public class Parazon : AppsManager
             moneyTXT.text = "$" + money.ToString();
 
             GameObject _object = Instantiate(_item.Key, waitingToDelivery.position, Quaternion.identity);
-            _object.GetComponent<ConsumeItem>().popUpUsable = popUsable;
+            //_object.GetComponent<ConsumeItem>().popUpUsable = popUsable;
 
             _object.GetComponent<ObjectsInteract>().dayToDestroy = gameManager.days + 2;
             _object.transform.parent = waitingToDelivery;
