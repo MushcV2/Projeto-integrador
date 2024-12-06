@@ -20,9 +20,11 @@ public class ObjectsInteract : MonoBehaviour
     [SerializeField] protected Rigidbody rb;
     [SerializeField] private Transform itemPos;
     [SerializeField] private Transform oldParent;
+    [SerializeField] private Vector3 newRot;
     [SerializeField] protected int itemIndex;
     [SerializeField] protected bool usable;
     [SerializeField] protected bool canOpen;
+    [SerializeField] protected bool haveCustomRot;
     public GameObject popUpUsable;
     public int dayToDestroy;
 
@@ -53,7 +55,9 @@ public class ObjectsInteract : MonoBehaviour
 
         transform.parent = itemPos;
         transform.position = itemPos.position;
-        transform.localEulerAngles = Vector3.zero;
+
+        if (haveCustomRot) transform.localEulerAngles = newRot;
+        else transform.localEulerAngles = Vector3.zero;
 
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
@@ -70,8 +74,12 @@ public class ObjectsInteract : MonoBehaviour
 
         transform.parent = oldParent;
 
-        if (!usable)
+        /*
+        if (!usable || !haveCustomRot)
             rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
+        */
+
+        if (haveCustomRot) transform.localEulerAngles = newRot;
 
         gameObject.layer = LayerMask.NameToLayer("Interact");
     }
