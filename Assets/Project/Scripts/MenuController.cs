@@ -111,6 +111,8 @@ public class MenuController : MonoBehaviour
         {
             OpenScreen("pause");
 
+            Time.timeScale = 0f;
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
