@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        playerPos.position = newDayPos.position;
+
         textParts = dayTXT.text.Split(';');
         dayTXT.text = textParts[0] + days.ToString();
         dayComputerTXT.text = textParts[0] + days.ToString();
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
         dayComputerTXT.text = textParts[0] + " " + days;
     }
 
-    private void DisplayDayPoints()
+    public void DisplayDayPoints()
     {
         playerControl.canMove = false;
         playerPos.position = newDayPos.position;

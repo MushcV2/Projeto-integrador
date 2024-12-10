@@ -47,7 +47,6 @@ public class TaskManager : MonoBehaviour
         missionAudio = GetComponent<AudioSource>();
 
         missionsCompletedCount = 0;
-
         AddThreeMissions();
     }
 
@@ -92,7 +91,7 @@ public class TaskManager : MonoBehaviour
             missionTXT.text = currentMission.name;
 
             missionAudio.clip = currentMission.missionAudio;
-            missionAudio.Play();
+            missionAudio.PlayDelayed(0.5f);
 
             if (currentMission.icon == null) taskIcon.gameObject.SetActive(false);
             else
