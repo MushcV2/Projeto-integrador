@@ -230,10 +230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf75842d97f14c4e8f219da5e201166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioS: {fileID: 0}
+  audioClip: []
   gameManager: {fileID: 0}
   player: {fileID: 0}
   appsManager:
   - {fileID: 0}
+  useComputer: {fileID: 0}
   turnOnButton: {fileID: 5815807715152127363}
   taskBarTurnOff: {fileID: 6220545645136912176}
   restartTaskBar: {fileID: 4162401353976032565}
@@ -254,8 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47475a30bfd8b2e4fb97e076835930d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioS: {fileID: 0}
   task: {fileID: 0}
-  popUpUsable: {fileID: 0}
   objectCollider: {fileID: 0}
   playerInteract: {fileID: 0}
   player: {fileID: 0}
@@ -267,12 +270,16 @@ MonoBehaviour:
   rb: {fileID: 0}
   itemPos: {fileID: 0}
   oldParent: {fileID: 0}
+  newRot: {x: 0, y: 0, z: 0}
   itemIndex: 0
   usable: 0
   canOpen: 0
+  haveCustomRot: 0
+  popUpUsable: {fileID: 0}
   dayToDestroy: 0
   chair: {fileID: 0}
   gameManager: {fileID: 0}
+  onPc: 0
 --- !u!1 &699311686451663813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,9 +1733,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce49d671304a91249b0fe993e82eceb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlWindows: {fileID: 0}
   windowPanel: {fileID: 37087427551504741}
   windowRect: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
+  isActive: 0
 --- !u!1 &5738293346126278736
 GameObject:
   m_ObjectHideFlags: 0

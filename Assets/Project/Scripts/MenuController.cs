@@ -111,8 +111,6 @@ public class MenuController : MonoBehaviour
         {
             OpenScreen("pause");
 
-            Time.timeScale = 0f;
-
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
@@ -128,6 +126,7 @@ public class MenuController : MonoBehaviour
             yield return null;
         }
 
+        Time.timeScale = 1f;
         pauseScreen = GameObject.Find("PauseScreen");
 
         closePauseScreen = pauseScreen.transform.Find("Close").GetComponent<Button>();
@@ -150,6 +149,7 @@ public class MenuController : MonoBehaviour
                 break;
 
             case "pause":
+                Time.timeScale = 0f;
                 pauseScreen.SetActive(true);
                 break;
 
@@ -224,6 +224,7 @@ public class MenuController : MonoBehaviour
 
     private void ToMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
         Destroy(gameObject);
     }
