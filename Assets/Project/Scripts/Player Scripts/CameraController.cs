@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
         transform.localEulerAngles = new Vector3(-rotY, rotX, 0f);
 
         if (character.gameObject.GetComponent<PlayerController>().finalVelocity.x != 0 || character.gameObject.GetComponent<PlayerController>().finalVelocity.z != 0) characterHead.localPosition += HeadEffect();
-        //else characterHead.localPosition = new Vector3(0f, initialPos, 0f);
+        else characterHead.localPosition = new Vector3(0f, initialPos, 0f);
     }
 
     private void LateUpdate()
