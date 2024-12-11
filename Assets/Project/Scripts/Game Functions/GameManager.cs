@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
             DayCycle();
     }
 
-    private void DayCycle()
+    public void DayCycle()
     {
         Debug.Log("Dia passou");
 

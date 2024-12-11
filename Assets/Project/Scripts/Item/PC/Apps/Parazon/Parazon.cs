@@ -16,7 +16,8 @@ public class Parazon : AppsManager
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject popUsable;
     [SerializeField] private SanityController sanityController;
-    [SerializeField] private int money = 150;
+    [SerializeField] private int money = 20;
+    private int previousMoney;
     public Transform waitingToDelivery;
 
     protected override void Start()
@@ -39,14 +40,9 @@ public class Parazon : AppsManager
 
     private void AddOnCart(int _index, GameObject _itemOBJ, int _price)
     {
-        if (money - _price <= 0)
-        {
-            Debug.Log("Sem dinheiro");
-            return;
-        }
-
         Debug.Log("O item comprado tem o index de: " +  _index);
 
+        previousMoney += _price;
         itemsCart.Add(_itemOBJ, _price);
         cartCountTXT.text = itemsCart.Count.ToString();
     }
@@ -57,10 +53,29 @@ public class Parazon : AppsManager
 
         Debug.Log("Confirmado");
 
-        cartCountTXT.text = "Empty";
+        cartCountTXT.text = "Vazio";
 
+        if (money - previousMoney < 0)
+        {
+            moneyTXT.color = Color.red;
+
+            yield return new WaitForSeconds(0.2f);
+            moneyTXT.color = Color.black;
+
+            itemsCart.Clear();
+            previousMoney = 0;
+
+            Debug.Log("Sem grana");
+
+            yield break;
+        }
+
+        Debug.Log("Foreach chamado");
         foreach (var _item in itemsCart)
         {
+            Debug.Log($"item comprado");
+
+            previousMoney = 0;
             money -= _item.Value;
             moneyTXT.text = "$" + money.ToString();
 
@@ -114,7 +129,7 @@ public class Parazon : AppsManager
 
     public void GiveMoney()
     {
-        money += 150;
+        money += 20;
         moneyTXT.text = "$" + money.ToString();
     }
 }

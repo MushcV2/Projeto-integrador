@@ -8,7 +8,7 @@ public class Sleep : ObjectsInteract
 
     public override void InteractFunction()
     {
-        gameManager.DisplayDayPoints();
+        gameManager.DayCycle();
     }
 
     public override void StopInteract()
